@@ -4,3 +4,7 @@
 /.settings/
 /logs/
 /vendor/
+/composer.lock
+/tools/bin/*
+/tools/composer.lock
+/tools/vendor/

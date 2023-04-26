@@ -11,9 +11,15 @@
     <coverage includeUncoveredFiles="true">
         <include>
             <directory suffix=".php">./src</directory>
+            <directory suffix=".php">./iban/src</directory>
         </include>
     </coverage>
-    <testsuite name="GenkgoMail tests">
-        <directory>./test/Unit</directory>
-    </testsuite>
+    <testsuites>
+        <testsuite name="GenkgoMail tests">
+            <directory>./test/Unit</directory>
+        </testsuite>
+        <testsuite name="IBAN tests">
+            <directory>./iban/Tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

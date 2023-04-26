@@ -13,26 +13,27 @@
         ]
     },
     "require": {
-        "php": "^8.0",
+        "php": "~5.6 || ~7.4",
         "ext-dom": "*",
         "ext-libxml": "*",
         "ext-simplexml": "*",
-        "jschaedl/iban-validation": "^1.7",
-        "moneyphp/money": "^3.3 || ^4.0"
+        "moneyphp/money": "^3.3 || ^4.0",
+        "symfony/options-resolver": "^3.4.47",
+        "symfony/yaml": "^3.4.47"
     },
     "autoload": {
         "psr-4": {
-            "Genkgo\\Camt\\": "src"
+            "Genkgo\\Camt\\": "src",
+            "Iban\\Validation\\": "iban/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Genkgo\\TestCamt\\": "test"
+            "Genkgo\\TestCamt\\": "test",
+            "Iban\\Validation\\Tests\\": "iban/Tests"
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "@stable",
-        "phpstan/phpstan": "@stable",
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "^5.7.27"
     }
 }
