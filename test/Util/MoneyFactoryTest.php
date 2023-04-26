@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Util;
 
 use Genkgo\Camt\Util\MoneyFactory;
@@ -13,8 +11,12 @@ class MoneyFactoryTest extends TestCase
 {
     /**
      * @dataProvider providerCreate
+     * @param string $amount
+     * @param string|null $CdtDbtInd
+     * @param \Money\Money $expected
+     * @return void
      */
-    public function testCreate(string $amount, ?string $CdtDbtInd, Money $expected): void
+    public function testCreate($amount, $CdtDbtInd, $expected)
     {
         $factory = new MoneyFactory();
 
@@ -25,7 +27,10 @@ class MoneyFactoryTest extends TestCase
         self::assertTrue($actual->equals($expected));
     }
 
-    public static function providerCreate(): array
+    /**
+     * @return mixed[]
+     */
+    public static function providerCreate()
     {
         return [
             ['<Amt Ccy="CHF">27.50</Amt>', null, Money::CHF(2750)],

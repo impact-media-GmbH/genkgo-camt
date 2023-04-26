@@ -1,65 +1,109 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use DateTimeImmutable;
 
 class GroupHeader
 {
-    private string $messageId;
+    /**
+     * @var string
+     */
+    private $messageId;
 
-    private DateTimeImmutable $createdOn;
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $createdOn;
 
-    private ?string $additionalInformation = null;
+    /**
+     * @var string|null
+     */
+    private $additionalInformation;
 
-    private ?Recipient $messageRecipient = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Recipient|null
+     */
+    private $messageRecipient;
 
-    private ?Pagination $pagination = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Pagination|null
+     */
+    private $pagination;
 
-    public function __construct(string $messageId, DateTimeImmutable $createdOn)
+    /**
+     * @param string $messageId
+     */
+    public function __construct($messageId, DateTimeImmutable $createdOn)
     {
+        $messageId = (string) $messageId;
         $this->messageId = $messageId;
         $this->createdOn = $createdOn;
     }
 
-    public function getMessageId(): string
+    /**
+     * @return string
+     */
+    public function getMessageId()
     {
         return $this->messageId;
     }
 
-    public function getCreatedOn(): DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getCreatedOn()
     {
         return $this->createdOn;
     }
 
-    public function getAdditionalInformation(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAdditionalInformation()
     {
         return $this->additionalInformation;
     }
 
-    public function setAdditionalInformation(string $additionalInformation): void
+    /**
+     * @param string $additionalInformation
+     * @return void
+     */
+    public function setAdditionalInformation($additionalInformation)
     {
         $this->additionalInformation = $additionalInformation;
     }
 
-    public function getMessageRecipient(): ?Recipient
+    /**
+     * @return \Genkgo\Camt\DTO\Recipient|null
+     */
+    public function getMessageRecipient()
     {
         return $this->messageRecipient;
     }
 
-    public function setMessageRecipient(Recipient $messageRecipient): void
+    /**
+     * @param \Genkgo\Camt\DTO\Recipient $messageRecipient
+     * @return void
+     */
+    public function setMessageRecipient($messageRecipient)
     {
         $this->messageRecipient = $messageRecipient;
     }
 
-    public function getPagination(): ?Pagination
+    /**
+     * @return \Genkgo\Camt\DTO\Pagination|null
+     */
+    public function getPagination()
     {
         return $this->pagination;
     }
 
-    public function setPagination(?Pagination $pagination): void
+    /**
+     * @param \Genkgo\Camt\DTO\Pagination|null $pagination
+     * @return void
+     */
+    public function setPagination($pagination)
     {
         $this->pagination = $pagination;
     }

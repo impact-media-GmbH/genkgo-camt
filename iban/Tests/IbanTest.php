@@ -18,16 +18,25 @@ final class IbanTest extends TestCase
 {
     /**
      * @dataProvider ibanProvider
+     *
+     * @param string $iban,
+     * @param string $expectedCountryCode,
+     * @param string $expectedChecksum,
+     * @param string $expectedBban,
+     * @param string $expectedBbanBankIdentifier,
+     * @param string $expectedFormatElectronic,
+     * @param string $expectedFormatPrint,
+     * @param string $expectedFormatAnonymized
      */
     public function testIbanCreation(
-        string $iban,
-        string $expectedCountryCode,
-        string $expectedChecksum,
-        string $expectedBban,
-        string $expectedBbanBankIdentifier,
-        string $expectedFormatElectronic,
-        string $expectedFormatPrint,
-        string $expectedFormatAnonymized
+        $iban,
+        $expectedCountryCode,
+        $expectedChecksum,
+        $expectedBban,
+        $expectedBbanBankIdentifier,
+        $expectedFormatElectronic,
+        $expectedFormatPrint,
+        $expectedFormatAnonymized
     ) {
         $iban = new Iban($iban);
 

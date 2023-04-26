@@ -1,69 +1,122 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class Recipient implements RelatedPartyTypeInterface
 {
-    private ?Address $address = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Address|null
+     */
+    private $address;
 
-    private ?string $countryOfResidence = null;
+    /**
+     * @var string|null
+     */
+    private $countryOfResidence;
 
-    private ?ContactDetails $contactDetails = null;
+    /**
+     * @var \Genkgo\Camt\DTO\ContactDetails|null
+     */
+    private $contactDetails;
 
-    private ?Identification $identification = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Identification|null
+     */
+    private $identification;
+    /**
+     * @var string|null
+     */
+    private $name;
 
-    public function __construct(private ?string $name = null)
-    {
-    }
-
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(Address $address): void
-    {
-        $this->address = $address;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
+    /**
+     * @param string|null $name
+     */
+    public function __construct($name = null)
     {
         $this->name = $name;
     }
 
-    public function getCountryOfResidence(): ?string
+    /**
+     * @return \Genkgo\Camt\DTO\Address|null
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * @param \Genkgo\Camt\DTO\Address $address
+     * @return void
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCountryOfResidence()
     {
         return $this->countryOfResidence;
     }
 
-    public function setCountryOfResidence(string $countryOfResidence): void
+    /**
+     * @param string $countryOfResidence
+     * @return void
+     */
+    public function setCountryOfResidence($countryOfResidence)
     {
         $this->countryOfResidence = $countryOfResidence;
     }
 
-    public function getContactDetails(): ?ContactDetails
+    /**
+     * @return \Genkgo\Camt\DTO\ContactDetails|null
+     */
+    public function getContactDetails()
     {
         return $this->contactDetails;
     }
 
-    public function setContactDetails(ContactDetails $contactDetails): void
+    /**
+     * @param \Genkgo\Camt\DTO\ContactDetails $contactDetails
+     * @return void
+     */
+    public function setContactDetails($contactDetails)
     {
         $this->contactDetails = $contactDetails;
     }
 
-    public function getIdentification(): ?Identification
+    /**
+     * @return \Genkgo\Camt\DTO\Identification|null
+     */
+    public function getIdentification()
     {
         return $this->identification;
     }
 
-    public function setIdentification(Identification $identification): void
+    /**
+     * @param \Genkgo\Camt\DTO\Identification $identification
+     * @return void
+     */
+    public function setIdentification($identification)
     {
         $this->identification = $identification;
     }

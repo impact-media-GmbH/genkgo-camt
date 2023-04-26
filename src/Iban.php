@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt;
 
 use Iban\Validation\Iban as IbanDetails;
@@ -10,10 +8,17 @@ use InvalidArgumentException;
 
 class Iban
 {
-    private string $iban;
+    /**
+     * @var string
+     */
+    private $iban;
 
-    public function __construct(string $iban)
+    /**
+     * @param string $iban
+     */
+    public function __construct($iban)
     {
+        $iban = (string) $iban;
         $iban = new IbanDetails($iban);
 
         if (!(new Validator())->validate($iban)) {
@@ -23,17 +28,27 @@ class Iban
         $this->iban = $iban->getNormalizedIban();
     }
 
-    public function getIban(): string
+    /**
+     * @return string
+     */
+    public function getIban()
     {
         return $this->iban;
     }
 
-    public function __toString(): string
+    /**
+     * @return string
+     */
+    public function __toString()
     {
         return $this->iban;
     }
 
-    public function equals(string $iban): bool
+    /**
+     * @param string $iban
+     * @return bool
+     */
+    public function equals($iban)
     {
         return (new IbanDetails($iban))->getNormalizedIban() === $this->iban;
     }

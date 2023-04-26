@@ -1,26 +1,41 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class ReturnInformation
 {
-    private string $code;
+    /**
+     * @var string
+     */
+    private $code;
 
-    private string $additionalInformation;
+    /**
+     * @var string
+     */
+    private $additionalInformation;
 
-    public function getCode(): string
+    /**
+     * @return string
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function getAdditionalInformation(): string
+    /**
+     * @return string
+     */
+    public function getAdditionalInformation()
     {
         return $this->additionalInformation;
     }
 
-    public static function fromUnstructured(string $code, string $additionalInformation): self
+    /**
+     * @param string $code
+     * @param string $additionalInformation
+     * @return $this
+     */
+    public static function fromUnstructured($code, $additionalInformation)
     {
         $information = new self();
         $information->code = $code;

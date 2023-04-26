@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Camt052\Decoder;
 
 use Genkgo\Camt\Camt052;
@@ -18,15 +16,24 @@ class MessageTest extends Framework\TestCase
      */
     private $mockedRecordDecoder;
 
-    private Message $decoder;
+    /**
+     * @var \Genkgo\Camt\Camt052\Decoder\V01\Message
+     */
+    private $decoder;
 
-    protected function setUp(): void
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
         $this->mockedRecordDecoder = $this->createMock(DecoderObject\Record::class);
         $this->decoder = new Message($this->mockedRecordDecoder, new DecoderObject\Date());
     }
 
-    public function testItAddsGroupHeader(): void
+    /**
+     * @return void
+     */
+    public function testItAddsGroupHeader()
     {
         $message = $this->createMock(DTO\Message::class);
 
@@ -38,7 +45,10 @@ class MessageTest extends Framework\TestCase
         $this->decoder->addGroupHeader($message, $this->getXmlMessage());
     }
 
-    public function testItAddsReports(): void
+    /**
+     * @return void
+     */
+    public function testItAddsReports()
     {
         $message = $this->createMock(DTO\Message::class);
 
@@ -61,7 +71,7 @@ class MessageTest extends Framework\TestCase
         $message
             ->expects(self::once())
             ->method('setRecords')
-            ->with(self::callback(static function (array $records): bool {
+            ->with(self::callback(static function (array $records) {
                 self::assertContainsOnlyInstancesOf(Camt052\DTO\Report::class, $records);
                 self::assertCount(1, $records);
 
@@ -71,7 +81,10 @@ class MessageTest extends Framework\TestCase
         $this->decoder->addRecords($message, $this->getXmlMessage());
     }
 
-    private function getXmlMessage(): SimpleXMLElement
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getXmlMessage()
     {
         $xmlContent = <<<XML
 <content>

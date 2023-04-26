@@ -1,27 +1,43 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class Pagination
 {
-    private string $pageNumber;
+    /**
+     * @var string
+     */
+    private $pageNumber;
 
-    private bool $lastPage;
+    /**
+     * @var bool
+     */
+    private $lastPage;
 
-    public function __construct(string $pageNumber, bool $lastPage)
+    /**
+     * @param string $pageNumber
+     * @param bool $lastPage
+     */
+    public function __construct($pageNumber, $lastPage)
     {
+        $pageNumber = (string) $pageNumber;
+        $lastPage = (bool) $lastPage;
         $this->pageNumber = $pageNumber;
         $this->lastPage = $lastPage;
     }
 
-    public function getPageNumber(): string
+    /**
+     * @return string
+     */
+    public function getPageNumber()
     {
         return $this->pageNumber;
     }
 
-    public function isLastPage(): bool
+    /**
+     * @return bool
+     */
+    public function isLastPage()
     {
         return $this->lastPage;
     }

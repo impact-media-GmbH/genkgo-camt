@@ -1,21 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt054\DTO\V04;
 
 use Genkgo\Camt\DTO\GroupHeader as BaseGroupHeader;
 
 class GroupHeader extends BaseGroupHeader
 {
-    private ?OriginalBusinessQuery $originalBusinessQuery = null;
+    /**
+     * @var \Genkgo\Camt\Camt054\DTO\V04\OriginalBusinessQuery|null
+     */
+    private $originalBusinessQuery;
 
-    public function getOriginalBusinessQuery(): ?OriginalBusinessQuery
+    /**
+     * @return \Genkgo\Camt\Camt054\DTO\V04\OriginalBusinessQuery|null
+     */
+    public function getOriginalBusinessQuery()
     {
         return $this->originalBusinessQuery;
     }
 
-    public function setOriginalBusinessQuery(OriginalBusinessQuery $originalBusinessQuery): self
+    /**
+     * @param \Genkgo\Camt\Camt054\DTO\V04\OriginalBusinessQuery $originalBusinessQuery
+     * @return $this
+     */
+    public function setOriginalBusinessQuery($originalBusinessQuery)
     {
         $this->originalBusinessQuery = $originalBusinessQuery;
 

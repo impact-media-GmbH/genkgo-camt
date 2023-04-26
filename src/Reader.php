@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt;
 
 use DOMDocument;
@@ -10,16 +8,26 @@ use Genkgo\Camt\Exception\ReaderException;
 
 class Reader
 {
-    private Config $config;
+    /**
+     * @var \Genkgo\Camt\Config
+     */
+    private $config;
 
-    private ?MessageFormatInterface $messageFormat = null;
+    /**
+     * @var \Genkgo\Camt\MessageFormatInterface|null
+     */
+    private $messageFormat;
 
     public function __construct(Config $config)
     {
         $this->config = $config;
     }
 
-    public function readDom(DOMDocument $document): Message
+    /**
+     * @param \DOMDocument $document
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    public function readDom($document)
     {
         if ($document->documentElement === null) {
             throw new ReaderException('Empty document');
@@ -31,7 +39,11 @@ class Reader
         return $this->messageFormat->getDecoder()->decode($document, $this->config->getXsdValidation());
     }
 
-    public function readString(string $string): Message
+    /**
+     * @param string $string
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    public function readString($string)
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->loadXML($string);
@@ -39,7 +51,11 @@ class Reader
         return $this->readDom($dom);
     }
 
-    public function readFile(string $file): Message
+    /**
+     * @param string $file
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    public function readFile($file)
     {
         if (!file_exists($file)) {
             throw new ReaderException("{$file} does not exists");
@@ -53,8 +69,13 @@ class Reader
         return $this->readString($string);
     }
 
-    private function getMessageFormatForXmlNs(string $xmlNs): MessageFormatInterface
+    /**
+     * @param string $xmlNs
+     * @return \Genkgo\Camt\MessageFormatInterface
+     */
+    private function getMessageFormatForXmlNs($xmlNs)
     {
+        $xmlNs = (string) $xmlNs;
         $messageFormats = $this->config->getMessageFormats();
         foreach ($messageFormats as $messageFormat) {
             if ($messageFormat->getXmlNs() === $xmlNs) {
@@ -65,7 +86,10 @@ class Reader
         throw new ReaderException("Unsupported format, cannot find message format with xmlns {$xmlNs}");
     }
 
-    public function getMessageFormat(): ?MessageFormatInterface
+    /**
+     * @return \Genkgo\Camt\MessageFormatInterface|null
+     */
+    public function getMessageFormat()
     {
         return $this->messageFormat;
     }

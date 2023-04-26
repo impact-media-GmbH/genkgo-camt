@@ -25,7 +25,7 @@ final class CountryInfoTest extends TestCase
      */
     private $countryInfo;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->countryInfo = new CountryInfo('DE');
     }
@@ -56,6 +56,6 @@ final class CountryInfoTest extends TestCase
      */
     private function getData()
     {
-        return include dirname(__DIR__, 1) . '/Resource/iban_registry_202009r88.php';
+        return include dirname(__DIR__) . '/Resource/iban_registry_202009r88.php';
     }
 }

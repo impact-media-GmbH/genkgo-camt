@@ -1,46 +1,72 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class OtherAccount extends Account
 {
-    private string $identification;
+    /**
+     * @var string
+     */
+    private $identification;
 
-    private ?string $schemeName = null;
+    /**
+     * @var string|null
+     */
+    private $schemeName;
 
-    private ?string $issuer = null;
+    /**
+     * @var string|null
+     */
+    private $issuer;
 
-    public function __construct(string $identification)
+    /**
+     * @param string $identification
+     */
+    public function __construct($identification)
     {
+        $identification = (string) $identification;
         $this->identification = $identification;
     }
 
     /**
      * @inheritDoc
+     * @return string
      */
-    public function getIdentification(): string
+    public function getIdentification()
     {
         return $this->identification;
     }
 
-    public function setSchemeName(string $schemeName): void
+    /**
+     * @param string $schemeName
+     * @return void
+     */
+    public function setSchemeName($schemeName)
     {
         $this->schemeName = $schemeName;
     }
 
-    public function getSchemeName(): ?string
+    /**
+     * @return string|null
+     */
+    public function getSchemeName()
     {
         return $this->schemeName;
     }
 
-    public function setIssuer(string $issuer): void
+    /**
+     * @param string $issuer
+     * @return void
+     */
+    public function setIssuer($issuer)
     {
         $this->issuer = $issuer;
     }
 
-    public function getIssuer(): ?string
+    /**
+     * @return string|null
+     */
+    public function getIssuer()
     {
         return $this->issuer;
     }

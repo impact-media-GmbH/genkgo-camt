@@ -1,10 +1,11 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 abstract class Account
 {
-    abstract public function getIdentification(): string;
+    /**
+     * @return string
+     */
+    abstract public function getIdentification();
 }

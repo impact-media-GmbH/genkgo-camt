@@ -1,27 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class BBANAccount extends Account
 {
-    private string $bban;
+    /**
+     * @var string
+     */
+    private $bban;
 
-    public function __construct(string $bban)
+    /**
+     * @param string $bban
+     */
+    public function __construct($bban)
     {
+        $bban = (string) $bban;
         $this->bban = $bban;
     }
 
-    public function getBban(): string
+    /**
+     * @return string
+     */
+    public function getBban()
     {
         return (string) $this->bban;
     }
 
     /**
      * @inheritDoc
+     * @return string
      */
-    public function getIdentification(): string
+    public function getIdentification()
     {
         return (string) $this->bban;
     }

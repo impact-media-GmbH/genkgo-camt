@@ -1,27 +1,41 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class ProprietaryReference
 {
-    private ?string $type;
+    /**
+     * @var string|null
+     */
+    private $type;
 
-    private ?string $reference;
+    /**
+     * @var string|null
+     */
+    private $reference;
 
-    public function __construct(?string $type, ?string $reference)
+    /**
+     * @param string|null $type
+     * @param string|null $reference
+     */
+    public function __construct($type, $reference)
     {
         $this->type = $type;
         $this->reference = $reference;
     }
 
-    public function getType(): ?string
+    /**
+     * @return string|null
+     */
+    public function getType()
     {
         return $this->type;
     }
 
-    public function getReference(): ?string
+    /**
+     * @return string|null
+     */
+    public function getReference()
     {
         return $this->reference;
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use DateTimeImmutable;
@@ -9,65 +7,124 @@ use Money\Money;
 
 class Entry
 {
-    private Record $record;
+    /**
+     * @var \Genkgo\Camt\DTO\Record
+     */
+    private $record;
 
-    private Money $amount;
+    /**
+     * @var \Money\Money
+     */
+    private $amount;
 
-    private ?DateTimeImmutable $bookingDate = null;
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private $bookingDate;
 
-    private ?DateTimeImmutable $valueDate = null;
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private $valueDate;
 
     /**
      * @var EntryTransactionDetail[]
      */
-    private array $transactionDetails = [];
+    private $transactionDetails = [];
 
-    private bool $reversalIndicator = false;
+    /**
+     * @var bool
+     */
+    private $reversalIndicator = false;
 
-    private ?string $reference = null;
+    /**
+     * @var string|null
+     */
+    private $reference;
 
-    private ?string $accountServicerReference = null;
+    /**
+     * @var string|null
+     */
+    private $accountServicerReference;
 
-    private int $index;
+    /**
+     * @var int
+     */
+    private $index;
 
-    private ?string $batchPaymentId = null;
+    /**
+     * @var string|null
+     */
+    private $batchPaymentId;
 
-    private ?string $additionalInfo = null;
+    /**
+     * @var string|null
+     */
+    private $additionalInfo;
 
-    private ?BankTransactionCode $bankTransactionCode = null;
+    /**
+     * @var \Genkgo\Camt\DTO\BankTransactionCode|null
+     */
+    private $bankTransactionCode;
 
-    private ?Charges $charges = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Charges|null
+     */
+    private $charges;
 
-    private ?string $status = null;
+    /**
+     * @var string|null
+     */
+    private $status;
 
-    public function __construct(Record $record, int $index, Money $amount)
+    /**
+     * @param int $index
+     */
+    public function __construct(Record $record, $index, Money $amount)
     {
+        $index = (int) $index;
         $this->record = $record;
         $this->index = $index;
         $this->amount = $amount;
     }
 
-    public function getRecord(): Record
+    /**
+     * @return \Genkgo\Camt\DTO\Record
+     */
+    public function getRecord()
     {
         return $this->record;
     }
 
-    public function getAmount(): Money
+    /**
+     * @return \Money\Money
+     */
+    public function getAmount()
     {
         return $this->amount;
     }
 
-    public function getBookingDate(): ?DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getBookingDate()
     {
         return $this->bookingDate;
     }
 
-    public function getValueDate(): ?DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getValueDate()
     {
         return $this->valueDate;
     }
 
-    public function addTransactionDetail(EntryTransactionDetail $detail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @return void
+     */
+    public function addTransactionDetail($detail)
     {
         $this->transactionDetails[] = $detail;
     }
@@ -75,12 +132,15 @@ class Entry
     /**
      * @return EntryTransactionDetail[]
      */
-    public function getTransactionDetails(): array
+    public function getTransactionDetails()
     {
         return $this->transactionDetails;
     }
 
-    public function getTransactionDetail(): ?EntryTransactionDetail
+    /**
+     * @return \Genkgo\Camt\DTO\EntryTransactionDetail|null
+     */
+    public function getTransactionDetail()
     {
         if (isset($this->transactionDetails[0])) {
             return $this->transactionDetails[0];
@@ -89,100 +149,165 @@ class Entry
         return null;
     }
 
-    public function getReversalIndicator(): bool
+    /**
+     * @return bool
+     */
+    public function getReversalIndicator()
     {
         return $this->reversalIndicator;
     }
 
-    public function setReversalIndicator(bool $reversalIndicator): void
+    /**
+     * @param bool $reversalIndicator
+     * @return void
+     */
+    public function setReversalIndicator($reversalIndicator)
     {
         $this->reversalIndicator = $reversalIndicator;
     }
 
-    public function getReference(): ?string
+    /**
+     * @return string|null
+     */
+    public function getReference()
     {
         return $this->reference;
     }
 
-    public function setReference(?string $reference): void
+    /**
+     * @param string|null $reference
+     * @return void
+     */
+    public function setReference($reference)
     {
         $this->reference = $reference;
     }
 
     /**
      * Unique reference as assigned by the account servicing institution to unambiguously identify the entry.
+     * @return string|null
      */
-    public function getAccountServicerReference(): ?string
+    public function getAccountServicerReference()
     {
         return $this->accountServicerReference;
     }
 
-    public function setAccountServicerReference(?string $accountServicerReference): void
+    /**
+     * @param string|null $accountServicerReference
+     * @return void
+     */
+    public function setAccountServicerReference($accountServicerReference)
     {
         $this->accountServicerReference = $accountServicerReference;
     }
 
-    public function getIndex(): int
+    /**
+     * @return int
+     */
+    public function getIndex()
     {
         return $this->index;
     }
 
-    public function setBatchPaymentId(?string $batchPaymentId): void
+    /**
+     * @param string|null $batchPaymentId
+     * @return void
+     */
+    public function setBatchPaymentId($batchPaymentId)
     {
         $this->batchPaymentId = trim((string) $batchPaymentId);
     }
 
-    public function getBatchPaymentId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getBatchPaymentId()
     {
         return $this->batchPaymentId;
     }
 
-    public function getAdditionalInfo(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAdditionalInfo()
     {
         return $this->additionalInfo;
     }
 
-    public function setAdditionalInfo(?string $additionalInfo): void
+    /**
+     * @param string|null $additionalInfo
+     * @return void
+     */
+    public function setAdditionalInfo($additionalInfo)
     {
         $this->additionalInfo = $additionalInfo;
     }
 
-    public function getBankTransactionCode(): ?BankTransactionCode
+    /**
+     * @return \Genkgo\Camt\DTO\BankTransactionCode|null
+     */
+    public function getBankTransactionCode()
     {
         return $this->bankTransactionCode;
     }
 
-    public function setBankTransactionCode(?BankTransactionCode $bankTransactionCode): void
+    /**
+     * @param \Genkgo\Camt\DTO\BankTransactionCode|null $bankTransactionCode
+     * @return void
+     */
+    public function setBankTransactionCode($bankTransactionCode)
     {
         $this->bankTransactionCode = $bankTransactionCode;
     }
 
-    public function getCharges(): ?Charges
+    /**
+     * @return \Genkgo\Camt\DTO\Charges|null
+     */
+    public function getCharges()
     {
         return $this->charges;
     }
 
-    public function setCharges(?Charges $charges): void
+    /**
+     * @param \Genkgo\Camt\DTO\Charges|null $charges
+     * @return void
+     */
+    public function setCharges($charges)
     {
         $this->charges = $charges;
     }
 
-    public function setBookingDate(?DateTimeImmutable $date): void
+    /**
+     * @param \DateTimeImmutable|null $date
+     * @return void
+     */
+    public function setBookingDate($date)
     {
         $this->bookingDate = $date;
     }
 
-    public function setValueDate(?DateTimeImmutable $date): void
+    /**
+     * @param \DateTimeImmutable|null $date
+     * @return void
+     */
+    public function setValueDate($date)
     {
         $this->valueDate = $date;
     }
 
-    public function getStatus(): ?string
+    /**
+     * @return string|null
+     */
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(?string $status): void
+    /**
+     * @param string|null $status
+     * @return void
+     */
+    public function setStatus($status)
     {
         $this->status = $status;
     }

@@ -1,21 +1,29 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use DateTimeImmutable;
 
 class RelatedDates
 {
-    private DateTimeImmutable $acceptanceDateTime;
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $acceptanceDateTime;
 
-    public function getAcceptanceDateTime(): DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getAcceptanceDateTime()
     {
         return $this->acceptanceDateTime;
     }
 
-    public static function fromUnstructured(DateTimeImmutable $acceptanceDateTime): self
+    /**
+     * @param \DateTimeImmutable $acceptanceDateTime
+     * @return $this
+     */
+    public static function fromUnstructured($acceptanceDateTime)
     {
         $information = new self();
         $information->acceptanceDateTime = $acceptanceDateTime;

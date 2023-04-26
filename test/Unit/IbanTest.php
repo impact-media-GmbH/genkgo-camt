@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use Genkgo\Camt\Iban;
@@ -10,7 +8,10 @@ use PHPUnit\Framework;
 
 class IbanTest extends Framework\TestCase
 {
-    public function testValidIbanMachineFormat(): void
+    /**
+     * @return void
+     */
+    public function testValidIbanMachineFormat()
     {
         $iban = new Iban($expected = 'NL91ABNA0417164300');
 
@@ -18,7 +19,10 @@ class IbanTest extends Framework\TestCase
         self::assertEquals($expected, $iban);
     }
 
-    public function testValidIbanHumanFormat(): void
+    /**
+     * @return void
+     */
+    public function testValidIbanHumanFormat()
     {
         $expected = 'NL91ABNA0417164300';
 
@@ -28,7 +32,10 @@ class IbanTest extends Framework\TestCase
         self::assertEquals($expected, $iban);
     }
 
-    public function testInvalidIban(): void
+    /**
+     * @return void
+     */
+    public function testInvalidIban()
     {
         $this->expectException(InvalidArgumentException::class);
 

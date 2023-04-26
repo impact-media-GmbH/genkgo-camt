@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Camt054;
 
 use DateTimeImmutable;
@@ -16,7 +14,10 @@ use PHPUnit\Framework;
 
 class EndToEndTest extends Framework\TestCase
 {
-    protected function getV2Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV2Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt054.v2.xml');
@@ -24,7 +25,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    protected function getV4Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV4Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt054.v4.xml');
@@ -32,7 +36,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V04())->getDecoder()->decode($dom);
     }
 
-    protected function getv8Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getv8Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt054.v8.xml');
@@ -40,7 +47,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V08())->getDecoder()->decode($dom);
     }
 
-    public function testGroupHeader(): void
+    /**
+     * @return void
+     */
+    public function testGroupHeader()
     {
         $messages = [
             $this->getV2Message(),
@@ -90,7 +100,10 @@ class EndToEndTest extends Framework\TestCase
         );
     }
 
-    public function testNotifications(): void
+    /**
+     * @return void
+     */
+    public function testNotifications()
     {
         $messages = [
             $this->getV2Message(),
@@ -122,7 +135,10 @@ class EndToEndTest extends Framework\TestCase
         self::assertTrue($notificationV4->getPagination()->isLastPage());
     }
 
-    public function testEntries(): void
+    /**
+     * @return void
+     */
+    public function testEntries()
     {
         $messages = [
             $this->getV2Message(),
@@ -151,7 +167,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testTransactionDetails(): void
+    /**
+     * @return void
+     */
+    public function testTransactionDetails()
     {
         $messages = [
             $this->getV2Message(),

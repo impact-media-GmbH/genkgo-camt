@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder\Factory\DTO;
 
 use Genkgo\Camt\DTO;
@@ -9,7 +7,11 @@ use SimpleXMLElement;
 
 class Address
 {
-    public static function createFromXml(SimpleXMLElement $xmlAddress): DTO\Address
+    /**
+     * @param \SimpleXMLElement $xmlAddress
+     * @return \Genkgo\Camt\DTO\Address
+     */
+    public static function createFromXml($xmlAddress)
     {
         $address = new DTO\Address();
 

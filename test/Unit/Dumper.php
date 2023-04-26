@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use DateTimeImmutable;
@@ -11,19 +9,30 @@ use ReflectionMethod;
 
 class Dumper
 {
-    private array $saw = [];
+    /**
+     * @var mixed[]
+     */
+    private $saw = [];
 
-    public function dump(object|array|string|float|int|bool|null $variable): string
+    /**
+     * @param object|mixed[]|string|float|int|bool|null $variable
+     * @return string
+     */
+    public function dump($variable)
     {
         $this->saw = [];
         $a = $this->cast($variable);
 
-        return json_encode($a, JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . PHP_EOL;
+        return json_encode($a, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . PHP_EOL;
     }
 
-    private function cast(object|array|string|float|int|bool|null $variable): array|string|float|int|bool|null
+    /**
+     * @param object|mixed[]|string|float|int|bool|null $variable
+     * @return mixed[]|string|float|int|bool|null
+     */
+    private function cast($variable)
     {
-        if ((is_iterable($variable))) {
+        if ((is_array($variable) || $variable instanceof \Traversable)) {
             $values = [];
             foreach ($variable as $k => $v) {
                 $values[$k] = $this->cast($v);
@@ -34,7 +43,7 @@ class Dumper
 
         if ($variable instanceof DateTimeImmutable) {
             return [
-                '__CLASS__' => $variable::class,
+                '__CLASS__' => get_class($variable),
                 $variable->setTimezone(new DateTimeZone('UTC'))->format('c'),
             ];
         }
@@ -48,9 +57,13 @@ class Dumper
         return $variable;
     }
 
-    private function castObject(object $object): array|string
+    /**
+     * @return mixed[]|string
+     * @param object $object
+     */
+    private function castObject($object)
     {
-        $key = spl_object_id($object);
+        $key = spl_object_hash($object);
         if (array_key_exists($key, $this->saw)) {
             return '__RECURSIVITY__';
         }
@@ -59,19 +72,23 @@ class Dumper
         $values = $this->getGetterValues($object);
         ksort($values);
 
-        $values = array_merge(['__CLASS__' => $object::class], $values);
+        $values = array_merge(['__CLASS__' => get_class($object)], $values);
 
         return $values;
     }
 
-    private function getGetterValues(object $object): array
+    /**
+     * @param object $object
+     * @return mixed[]
+     */
+    private function getGetterValues($object)
     {
         $class = new ReflectionClass($object);
 
         $values = [];
         foreach ($class->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             $name = $method->getName();
-            if (str_starts_with($name, 'get')) {
+            if (strncmp($name, 'get', strlen('get')) === 0) {
                 $values[$name] = $method->invoke($object);
             }
         }

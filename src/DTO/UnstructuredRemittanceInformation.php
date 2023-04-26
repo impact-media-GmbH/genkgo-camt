@@ -1,24 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class UnstructuredRemittanceInformation
 {
-    private string $message;
+    /**
+     * @var string
+     */
+    private $message;
 
-    public function __construct(string $message)
+    /**
+     * @param string $message
+     */
+    public function __construct($message)
     {
+        $message = (string) $message;
         $this->message = $message;
     }
 
-    public function getMessage(): string
+    /**
+     * @return string
+     */
+    public function getMessage()
     {
         return $this->message;
     }
 
-    public function setMessage(string $message): void
+    /**
+     * @param string $message
+     * @return void
+     */
+    public function setMessage($message)
     {
         $this->message = $message;
     }

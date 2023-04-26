@@ -1,52 +1,88 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use Money\Money;
 
 class EntryTransactionDetail
 {
-    private ?Reference $reference = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Reference|null
+     */
+    private $reference;
 
     /**
      * @var RelatedParty[]
      */
-    private array $relatedParties = [];
+    private $relatedParties = [];
 
     /**
      * @var RelatedAgent[]
      */
-    private array $relatedAgents = [];
+    private $relatedAgents = [];
 
-    private ?RemittanceInformation $remittanceInformation = null;
+    /**
+     * @var \Genkgo\Camt\DTO\RemittanceInformation|null
+     */
+    private $remittanceInformation;
 
-    private ?RelatedDates $relatedDates = null;
+    /**
+     * @var \Genkgo\Camt\DTO\RelatedDates|null
+     */
+    private $relatedDates;
 
-    private ?ReturnInformation $returnInformation = null;
+    /**
+     * @var \Genkgo\Camt\DTO\ReturnInformation|null
+     */
+    private $returnInformation;
 
-    private ?AdditionalTransactionInformation $additionalTransactionInformation = null;
+    /**
+     * @var \Genkgo\Camt\DTO\AdditionalTransactionInformation|null
+     */
+    private $additionalTransactionInformation;
 
-    private ?BankTransactionCode $bankTransactionCode = null;
+    /**
+     * @var \Genkgo\Camt\DTO\BankTransactionCode|null
+     */
+    private $bankTransactionCode;
 
-    private ?Charges $charges = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Charges|null
+     */
+    private $charges;
 
-    private ?Money $amountDetails = null;
+    /**
+     * @var \Money\Money|null
+     */
+    private $amountDetails;
 
-    private ?Money $amount = null;
+    /**
+     * @var \Money\Money|null
+     */
+    private $amount;
 
-    public function setReference(?Reference $reference): void
+    /**
+     * @param \Genkgo\Camt\DTO\Reference|null $reference
+     * @return void
+     */
+    public function setReference($reference)
     {
         $this->reference = $reference;
     }
 
-    public function getReference(): ?Reference
+    /**
+     * @return \Genkgo\Camt\DTO\Reference|null
+     */
+    public function getReference()
     {
         return $this->reference;
     }
 
-    public function addRelatedParty(RelatedParty $relatedParty): void
+    /**
+     * @param \Genkgo\Camt\DTO\RelatedParty $relatedParty
+     * @return void
+     */
+    public function addRelatedParty($relatedParty)
     {
         $this->relatedParties[] = $relatedParty;
     }
@@ -54,12 +90,15 @@ class EntryTransactionDetail
     /**
      * @return RelatedParty[]
      */
-    public function getRelatedParties(): array
+    public function getRelatedParties()
     {
         return $this->relatedParties;
     }
 
-    public function getRelatedParty(): ?RelatedParty
+    /**
+     * @return \Genkgo\Camt\DTO\RelatedParty|null
+     */
+    public function getRelatedParty()
     {
         if (isset($this->relatedParties[0])) {
             return $this->relatedParties[0];
@@ -68,7 +107,11 @@ class EntryTransactionDetail
         return null;
     }
 
-    public function addRelatedAgent(RelatedAgent $relatedAgent): void
+    /**
+     * @param \Genkgo\Camt\DTO\RelatedAgent $relatedAgent
+     * @return void
+     */
+    public function addRelatedAgent($relatedAgent)
     {
         $this->relatedAgents[] = $relatedAgent;
     }
@@ -76,12 +119,15 @@ class EntryTransactionDetail
     /**
      * @return RelatedAgent[]
      */
-    public function getRelatedAgents(): array
+    public function getRelatedAgents()
     {
         return $this->relatedAgents;
     }
 
-    public function getRelatedAgent(): ?RelatedAgent
+    /**
+     * @return \Genkgo\Camt\DTO\RelatedAgent|null
+     */
+    public function getRelatedAgent()
     {
         if (isset($this->relatedAgents[0])) {
             return $this->relatedAgents[0];
@@ -90,82 +136,138 @@ class EntryTransactionDetail
         return null;
     }
 
-    public function setRemittanceInformation(?RemittanceInformation $remittanceInformation): void
+    /**
+     * @param \Genkgo\Camt\DTO\RemittanceInformation|null $remittanceInformation
+     * @return void
+     */
+    public function setRemittanceInformation($remittanceInformation)
     {
         $this->remittanceInformation = $remittanceInformation;
     }
 
-    public function getRemittanceInformation(): ?RemittanceInformation
+    /**
+     * @return \Genkgo\Camt\DTO\RemittanceInformation|null
+     */
+    public function getRemittanceInformation()
     {
         return $this->remittanceInformation;
     }
 
-    public function setRelatedDates(?RelatedDates $relatedDates): void
+    /**
+     * @param \Genkgo\Camt\DTO\RelatedDates|null $relatedDates
+     * @return void
+     */
+    public function setRelatedDates($relatedDates)
     {
         $this->relatedDates = $relatedDates;
     }
 
-    public function getRelatedDates(): ?RelatedDates
+    /**
+     * @return \Genkgo\Camt\DTO\RelatedDates|null
+     */
+    public function getRelatedDates()
     {
         return $this->relatedDates;
     }
 
-    public function getReturnInformation(): ?ReturnInformation
+    /**
+     * @return \Genkgo\Camt\DTO\ReturnInformation|null
+     */
+    public function getReturnInformation()
     {
         return $this->returnInformation;
     }
 
-    public function setReturnInformation(?ReturnInformation $information): void
+    /**
+     * @param \Genkgo\Camt\DTO\ReturnInformation|null $information
+     * @return void
+     */
+    public function setReturnInformation($information)
     {
         $this->returnInformation = $information;
     }
 
-    public function setAdditionalTransactionInformation(?AdditionalTransactionInformation $additionalTransactionInformation): void
+    /**
+     * @param \Genkgo\Camt\DTO\AdditionalTransactionInformation|null $additionalTransactionInformation
+     * @return void
+     */
+    public function setAdditionalTransactionInformation($additionalTransactionInformation)
     {
         $this->additionalTransactionInformation = $additionalTransactionInformation;
     }
 
-    public function getAdditionalTransactionInformation(): ?AdditionalTransactionInformation
+    /**
+     * @return \Genkgo\Camt\DTO\AdditionalTransactionInformation|null
+     */
+    public function getAdditionalTransactionInformation()
     {
         return $this->additionalTransactionInformation;
     }
 
-    public function getBankTransactionCode(): ?BankTransactionCode
+    /**
+     * @return \Genkgo\Camt\DTO\BankTransactionCode|null
+     */
+    public function getBankTransactionCode()
     {
         return $this->bankTransactionCode;
     }
 
-    public function setBankTransactionCode(BankTransactionCode $bankTransactionCode): void
+    /**
+     * @param \Genkgo\Camt\DTO\BankTransactionCode $bankTransactionCode
+     * @return void
+     */
+    public function setBankTransactionCode($bankTransactionCode)
     {
         $this->bankTransactionCode = $bankTransactionCode;
     }
 
-    public function getCharges(): ?Charges
+    /**
+     * @return \Genkgo\Camt\DTO\Charges|null
+     */
+    public function getCharges()
     {
         return $this->charges;
     }
 
-    public function setCharges(?Charges $charges): void
+    /**
+     * @param \Genkgo\Camt\DTO\Charges|null $charges
+     * @return void
+     */
+    public function setCharges($charges)
     {
         $this->charges = $charges;
     }
 
-    public function getAmountDetails(): ?Money
+    /**
+     * @return \Money\Money|null
+     */
+    public function getAmountDetails()
     {
         return $this->amountDetails;
     }
 
-    public function setAmountDetails(?Money $amountDetails): void
+    /**
+     * @param \Money\Money|null $amountDetails
+     * @return void
+     */
+    public function setAmountDetails($amountDetails)
     {
         $this->amountDetails = $amountDetails;
     }
 
-    public function getAmount(): ?Money
+    /**
+     * @return \Money\Money|null
+     */
+    public function getAmount()
     {
         return $this->amount;
     }
 
-    public function setAmount(?Money $amount): void
+    /**
+     * @param \Money\Money|null $amount
+     * @return void
+     */
+    public function setAmount($amount)
     {
         $this->amount = $amount;
     }

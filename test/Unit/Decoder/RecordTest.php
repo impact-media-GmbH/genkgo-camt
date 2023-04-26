@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Decoder;
 
 use Genkgo\Camt\Camt053;
@@ -18,15 +16,24 @@ class RecordTest extends Framework\TestCase
      */
     private $mockedEntryDecoder;
 
-    private Record $decoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\Record
+     */
+    private $decoder;
 
-    protected function setUp(): void
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
         $this->mockedEntryDecoder = $this->createMock(Decoder\Entry::class);
         $this->decoder = new Record($this->mockedEntryDecoder, new Decoder\Date());
     }
 
-    public function testItDoesNotAddBalancesIfThereAreNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddBalancesIfThereAreNoneInXml()
     {
         $record = $this->createMock(Camt053\DTO\Statement::class);
 
@@ -39,7 +46,10 @@ class RecordTest extends Framework\TestCase
         $this->decoder->addBalances($record, $xmlRecord);
     }
 
-    public function testItAddsBalancesIfThereArePresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsBalancesIfThereArePresentInXml()
     {
         $record = $this->createMock(Camt053\DTO\Statement::class);
 
@@ -51,7 +61,10 @@ class RecordTest extends Framework\TestCase
         $this->decoder->addBalances($record, $this->getXmlRecord());
     }
 
-    public function testItAddsNoEntriesIfThereAreNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsNoEntriesIfThereAreNoneInXml()
     {
         $record = $this->createMock(DTO\Record::class);
 
@@ -62,18 +75,17 @@ class RecordTest extends Framework\TestCase
 
         $this->mockedEntryDecoder
             ->expects(self::never())
-            ->method('addTransactionDetails')
-            ->with(
-                self::anything(),
-                self::anything(),
-            );
+            ->method('addTransactionDetails')->with(self::anything(), self::anything());
 
         $xmlRecord = new SimpleXMLElement('<content></content>');
 
         $this->decoder->addEntries($record, $xmlRecord);
     }
 
-    public function testItAddsEntriesIfThereArePresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsEntriesIfThereArePresentInXml()
     {
         $record = $this->createMock(DTO\Record::class);
 
@@ -84,16 +96,15 @@ class RecordTest extends Framework\TestCase
 
         $this->mockedEntryDecoder
             ->expects(self::once())
-            ->method('addTransactionDetails')
-            ->with(
-                self::isInstanceOf(DTO\Entry::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addTransactionDetails')->with(self::isInstanceOf(DTO\Entry::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->decoder->addEntries($record, $this->getXmlRecord());
     }
 
-    private function getXmlRecord(): SimpleXMLElement
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getXmlRecord()
     {
         $xmlContent = <<<XML
 <content>

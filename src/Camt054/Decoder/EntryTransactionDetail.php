@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt054\Decoder;
 
 use Genkgo\Camt\Decoder\EntryTransactionDetail as BaseDecoder;
@@ -13,8 +11,10 @@ class EntryTransactionDetail extends BaseDecoder
 {
     /**
      * @inheritDoc
+     * @param \SimpleXMLElement|null $xmlRelatedPartyTypeAccount
+     * @return \Genkgo\Camt\DTO\Account|null
      */
-    public function getRelatedPartyAccount(?SimpleXMLElement $xmlRelatedPartyTypeAccount): ?DTO\Account
+    public function getRelatedPartyAccount($xmlRelatedPartyTypeAccount)
     {
         if (!$xmlRelatedPartyTypeAccount) {
             return null;

@@ -18,5 +18,5 @@ namespace Iban\Validation\Swift;
  */
 interface RegistryLoaderInterface
 {
-    public function load(): array;
+    public function load();
 }

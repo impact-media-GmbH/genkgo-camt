@@ -1,27 +1,36 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class ProprietaryAccount extends Account
 {
-    private string $id;
+    /**
+     * @var string
+     */
+    private $id;
 
-    public function __construct(string $id)
+    /**
+     * @param string $id
+     */
+    public function __construct($id)
     {
+        $id = (string) $id;
         $this->id = $id;
     }
 
-    public function getId(): string
+    /**
+     * @return string
+     */
+    public function getId()
     {
         return (string) $this->id;
     }
 
     /**
      * @inheritDoc
+     * @return string
      */
-    public function getIdentification(): string
+    public function getIdentification()
     {
         return (string) $this->id;
     }

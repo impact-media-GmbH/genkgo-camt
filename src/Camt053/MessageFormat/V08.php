@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt053\MessageFormat;
 
 use Genkgo\Camt\Camt053;
@@ -11,22 +9,34 @@ use Genkgo\Camt\MessageFormatInterface;
 
 final class V08 implements MessageFormatInterface
 {
-    public function getXmlNs(): string
+    /**
+     * @return string
+     */
+    public function getXmlNs()
     {
         return 'urn:iso:std:iso:20022:tech:xsd:camt.053.001.08';
     }
 
-    public function getMsgId(): string
+    /**
+     * @return string
+     */
+    public function getMsgId()
     {
         return 'camt.053.001.08';
     }
 
-    public function getName(): string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return 'BankToCustomerStatementV08';
     }
 
-    public function getDecoder(): DecoderInterface
+    /**
+     * @return \Genkgo\Camt\DecoderInterface
+     */
+    public function getDecoder()
     {
         $entryTransactionDetailDecoder = new Camt053\Decoder\EntryTransactionDetail(new Decoder\Date());
         $entryDecoder = new Decoder\Entry($entryTransactionDetailDecoder);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder;
 
 use Genkgo\Camt\Decoder\Factory\DTO as DTOFactory;
@@ -13,9 +11,15 @@ use SimpleXMLElement;
 
 abstract class EntryTransactionDetail
 {
-    private DateDecoderInterface $dateDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\DateDecoderInterface
+     */
+    private $dateDecoder;
 
-    private MoneyFactory $moneyFactory;
+    /**
+     * @var \Genkgo\Camt\Util\MoneyFactory
+     */
+    private $moneyFactory;
 
     /**
      * EntryTransactionDetail constructor.
@@ -26,7 +30,12 @@ abstract class EntryTransactionDetail
         $this->moneyFactory = new MoneyFactory();
     }
 
-    public function addReference(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addReference($detail, $xmlDetail)
     {
         if (false === isset($xmlDetail->Refs)) {
             return;
@@ -60,7 +69,12 @@ abstract class EntryTransactionDetail
         $detail->setReference($reference);
     }
 
-    public function addRelatedParties(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addRelatedParties($detail, $xmlDetail)
     {
         if (false === isset($xmlDetail->RltdPties)) {
             return;
@@ -98,11 +112,15 @@ abstract class EntryTransactionDetail
 
     /**
      * @param class-string<RelatedPartyTypeInterface> $relatedPartyTypeClass
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlRelatedPartyType
+     * @param \SimpleXMLElement|null $xmlRelatedPartyTypeAccount
+     * @return void
      */
-    protected function addRelatedParty(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlRelatedPartyType, string $relatedPartyTypeClass, ?SimpleXMLElement $xmlRelatedPartyTypeAccount = null): void
+    protected function addRelatedParty($detail, $xmlRelatedPartyType, $relatedPartyTypeClass, $xmlRelatedPartyTypeAccount = null)
     {
         // CAMT v08 uses substructure, so we check for its existence or fallback to the element itself to keep compatibility with CAMT v04
-        $xmlPartyDetail = $xmlRelatedPartyType->Pty ?: $xmlRelatedPartyType->Agt?->FinInstnId ?: $xmlRelatedPartyType;
+        $xmlPartyDetail = $xmlRelatedPartyType->Pty ?: (($xmlRelatedPartyTypeAgt = $xmlRelatedPartyType->Agt) ? $xmlRelatedPartyTypeAgt->FinInstnId : null) ?: $xmlRelatedPartyType;
 
         $xmlRelatedPartyName = (isset($xmlPartyDetail->Nm)) ? (string) $xmlPartyDetail->Nm : null;
         $relatedPartyType = new $relatedPartyTypeClass($xmlRelatedPartyName);
@@ -116,7 +134,12 @@ abstract class EntryTransactionDetail
         $detail->addRelatedParty($relatedParty);
     }
 
-    public function addRelatedAgents(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addRelatedAgents($detail, $xmlDetail)
     {
         if (false === isset($xmlDetail->RltdAgts)) {
             return;
@@ -137,7 +160,12 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addRemittanceInformation(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addRemittanceInformation($detail, $xmlDetail)
     {
         if (false === isset($xmlDetail->RmtInf)) {
             return;
@@ -220,7 +248,12 @@ abstract class EntryTransactionDetail
         $detail->setRemittanceInformation($remittanceInformation);
     }
 
-    public function addRelatedDates(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addRelatedDates($detail, $xmlDetail)
     {
         if (false === isset($xmlDetail->RltdDts)) {
             return;
@@ -236,7 +269,12 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addReturnInformation(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addReturnInformation($detail, $xmlDetail)
     {
         if (isset($xmlDetail->RtrInf, $xmlDetail->RtrInf->Rsn->Cd)) {
             $remittanceInformation = DTO\ReturnInformation::fromUnstructured(
@@ -247,7 +285,12 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addAdditionalTransactionInformation(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addAdditionalTransactionInformation($detail, $xmlDetail)
     {
         if (isset($xmlDetail->AddtlTxInf)) {
             $additionalInformation = new DTO\AdditionalTransactionInformation(
@@ -257,7 +300,12 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addBankTransactionCode(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addBankTransactionCode($detail, $xmlDetail)
     {
         $bankTransactionCode = new DTO\BankTransactionCode();
 
@@ -294,7 +342,12 @@ abstract class EntryTransactionDetail
         $detail->setBankTransactionCode($bankTransactionCode);
     }
 
-    public function addCharges(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @return void
+     */
+    public function addCharges($detail, $xmlDetail)
     {
         if (isset($xmlDetail->Chrgs)) {
             $charges = new DTO\Charges();
@@ -328,7 +381,13 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addAmountDetails(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail, SimpleXMLElement $CdtDbtInd): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @param \SimpleXMLElement $CdtDbtInd
+     * @return void
+     */
+    public function addAmountDetails($detail, $xmlDetail, $CdtDbtInd)
     {
         if (isset($xmlDetail->AmtDtls, $xmlDetail->AmtDtls->TxAmt, $xmlDetail->AmtDtls->TxAmt->Amt)) {
             $money = $this->moneyFactory->create($xmlDetail->AmtDtls->TxAmt->Amt, $CdtDbtInd);
@@ -336,7 +395,13 @@ abstract class EntryTransactionDetail
         }
     }
 
-    public function addAmount(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail, SimpleXMLElement $CdtDbtInd): void
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $xmlDetail
+     * @param \SimpleXMLElement $CdtDbtInd
+     * @return void
+     */
+    public function addAmount($detail, $xmlDetail, $CdtDbtInd)
     {
         if (isset($xmlDetail->Amt)) {
             $money = $this->moneyFactory->create($xmlDetail->Amt, $CdtDbtInd);
@@ -344,5 +409,9 @@ abstract class EntryTransactionDetail
         }
     }
 
-    abstract public function getRelatedPartyAccount(?SimpleXMLElement $xmlRelatedPartyTypeAccount): ?DTO\Account;
+    /**
+     * @param \SimpleXMLElement|null $xmlRelatedPartyTypeAccount
+     * @return \Genkgo\Camt\DTO\Account|null
+     */
+    abstract public function getRelatedPartyAccount($xmlRelatedPartyTypeAccount);
 }

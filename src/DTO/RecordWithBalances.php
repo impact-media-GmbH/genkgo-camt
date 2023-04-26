@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 abstract class RecordWithBalances extends Record
@@ -9,9 +7,13 @@ abstract class RecordWithBalances extends Record
     /**
      * @var Balance[]
      */
-    private array $balances = [];
+    private $balances = [];
 
-    public function addBalance(Balance $balance): void
+    /**
+     * @param \Genkgo\Camt\DTO\Balance $balance
+     * @return void
+     */
+    public function addBalance($balance)
     {
         $this->balances[] = $balance;
     }
@@ -19,7 +21,7 @@ abstract class RecordWithBalances extends Record
     /**
      * @return Balance[]
      */
-    public function getBalances(): array
+    public function getBalances()
     {
         return $this->balances;
     }

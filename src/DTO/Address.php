@@ -1,41 +1,67 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class Address
 {
-    private ?string $country = null;
+    /**
+     * @var string|null
+     */
+    private $country;
 
-    private ?string $countrySubDivision = null;
+    /**
+     * @var string|null
+     */
+    private $countrySubDivision;
 
     /**
      * @var string[]
      */
-    private array $addressLines = [];
+    private $addressLines = [];
 
-    private ?string $department = null;
+    /**
+     * @var string|null
+     */
+    private $department;
 
-    private ?string $subDepartment = null;
+    /**
+     * @var string|null
+     */
+    private $subDepartment;
 
-    private ?string $streetName = null;
+    /**
+     * @var string|null
+     */
+    private $streetName;
 
-    private ?string $buildingNumber = null;
+    /**
+     * @var string|null
+     */
+    private $buildingNumber;
 
-    private ?string $postCode = null;
+    /**
+     * @var string|null
+     */
+    private $postCode;
 
-    private ?string $townName = null;
+    /**
+     * @var string|null
+     */
+    private $townName;
 
-    public function getCountry(): ?string
+    /**
+     * @return string|null
+     */
+    public function getCountry()
     {
         return $this->country;
     }
 
     /**
      * @return static
+     * @param string $country
      */
-    public function setCountry(string $country): self
+    public function setCountry($country)
     {
         $cloned = clone $this;
         $cloned->country = $country;
@@ -43,15 +69,19 @@ class Address
         return $cloned;
     }
 
-    public function getCountrySubDivision(): ?string
+    /**
+     * @return string|null
+     */
+    public function getCountrySubDivision()
     {
         return $this->countrySubDivision;
     }
 
     /**
      * @return static
+     * @param string $countrySubDivision
      */
-    public function setCountrySubDivision(string $countrySubDivision): self
+    public function setCountrySubDivision($countrySubDivision)
     {
         $cloned = clone $this;
         $cloned->countrySubDivision = $countrySubDivision;
@@ -62,7 +92,7 @@ class Address
     /**
      * @return string[]
      */
-    public function getAddressLines(): array
+    public function getAddressLines()
     {
         return $this->addressLines;
     }
@@ -72,7 +102,7 @@ class Address
      *
      * @return static
      */
-    public function setAddressLines(array $addressLines): self
+    public function setAddressLines($addressLines)
     {
         $cloned = clone $this;
         $cloned->addressLines = $addressLines;
@@ -82,8 +112,9 @@ class Address
 
     /**
      * @return static
+     * @param string $addressLine
      */
-    public function addAddressLine(string $addressLine): self
+    public function addAddressLine($addressLine)
     {
         $cloned = clone $this;
         $cloned->addressLines[] = $addressLine;
@@ -91,15 +122,19 @@ class Address
         return $cloned;
     }
 
-    public function getDepartment(): ?string
+    /**
+     * @return string|null
+     */
+    public function getDepartment()
     {
         return $this->department;
     }
 
     /**
      * @return static
+     * @param string $department
      */
-    public function setDepartment(string $department): self
+    public function setDepartment($department)
     {
         $cloned = clone $this;
         $cloned->department = $department;
@@ -107,15 +142,19 @@ class Address
         return $cloned;
     }
 
-    public function getSubDepartment(): ?string
+    /**
+     * @return string|null
+     */
+    public function getSubDepartment()
     {
         return $this->subDepartment;
     }
 
     /**
      * @return static
+     * @param string $subDepartment
      */
-    public function setSubDepartment(string $subDepartment): self
+    public function setSubDepartment($subDepartment)
     {
         $cloned = clone $this;
         $cloned->subDepartment = $subDepartment;
@@ -123,15 +162,19 @@ class Address
         return $cloned;
     }
 
-    public function getStreetName(): ?string
+    /**
+     * @return string|null
+     */
+    public function getStreetName()
     {
         return $this->streetName;
     }
 
     /**
      * @return static
+     * @param string $streetName
      */
-    public function setStreetName(string $streetName): self
+    public function setStreetName($streetName)
     {
         $cloned = clone $this;
         $cloned->streetName = $streetName;
@@ -139,15 +182,19 @@ class Address
         return $cloned;
     }
 
-    public function getBuildingNumber(): ?string
+    /**
+     * @return string|null
+     */
+    public function getBuildingNumber()
     {
         return $this->buildingNumber;
     }
 
     /**
      * @return static
+     * @param string $buildingNumber
      */
-    public function setBuildingNumber(string $buildingNumber): self
+    public function setBuildingNumber($buildingNumber)
     {
         $cloned = clone $this;
         $cloned->buildingNumber = $buildingNumber;
@@ -155,15 +202,19 @@ class Address
         return $cloned;
     }
 
-    public function getPostCode(): ?string
+    /**
+     * @return string|null
+     */
+    public function getPostCode()
     {
         return $this->postCode;
     }
 
     /**
      * @return static
+     * @param string $postCode
      */
-    public function setPostCode(string $postCode): self
+    public function setPostCode($postCode)
     {
         $cloned = clone $this;
         $cloned->postCode = $postCode;
@@ -171,15 +222,19 @@ class Address
         return $cloned;
     }
 
-    public function getTownName(): ?string
+    /**
+     * @return string|null
+     */
+    public function getTownName()
     {
         return $this->townName;
     }
 
     /**
      * @return static
+     * @param string $townName
      */
-    public function setTownName(string $townName): self
+    public function setTownName($townName)
     {
         $cloned = clone $this;
         $cloned->townName = $townName;

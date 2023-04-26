@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use DateTimeImmutable;
@@ -9,58 +7,100 @@ use Money\Money;
 
 class Balance
 {
-    public const TYPE_OPENING = 'opening';
+    const TYPE_OPENING = 'opening';
 
-    public const TYPE_OPENING_AVAILABLE = 'opening_available';
+    const TYPE_OPENING_AVAILABLE = 'opening_available';
 
-    public const TYPE_CLOSING = 'closing';
+    const TYPE_CLOSING = 'closing';
 
-    public const TYPE_CLOSING_AVAILABLE = 'closing_available';
+    const TYPE_CLOSING_AVAILABLE = 'closing_available';
 
-    private Money $amount;
+    /**
+     * @var \Money\Money
+     */
+    private $amount;
 
-    private string $type;
+    /**
+     * @var string
+     */
+    private $type;
 
-    private DateTimeImmutable $date;
+    /**
+     * @var \DateTimeImmutable
+     */
+    private $date;
 
-    private function __construct(string $type, Money $amount, DateTimeImmutable $date)
+    /**
+     * @param string $type
+     */
+    private function __construct($type, Money $amount, DateTimeImmutable $date)
     {
+        $type = (string) $type;
         $this->type = $type;
         $this->amount = $amount;
         $this->date = $date;
     }
 
-    public function getDate(): DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getDate()
     {
         return $this->date;
     }
 
-    public function getAmount(): Money
+    /**
+     * @return \Money\Money
+     */
+    public function getAmount()
     {
         return $this->amount;
     }
 
-    public function getType(): string
+    /**
+     * @return string
+     */
+    public function getType()
     {
         return $this->type;
     }
 
-    public static function opening(Money $amount, DateTimeImmutable $date): self
+    /**
+     * @param \Money\Money $amount
+     * @param \DateTimeImmutable $date
+     * @return $this
+     */
+    public static function opening($amount, $date)
     {
         return new self(self::TYPE_OPENING, $amount, $date);
     }
 
-    public static function openingAvailable(Money $amount, DateTimeImmutable $date): self
+    /**
+     * @param \Money\Money $amount
+     * @param \DateTimeImmutable $date
+     * @return $this
+     */
+    public static function openingAvailable($amount, $date)
     {
         return new self(self::TYPE_OPENING_AVAILABLE, $amount, $date);
     }
 
-    public static function closing(Money $amount, DateTimeImmutable $date): self
+    /**
+     * @param \Money\Money $amount
+     * @param \DateTimeImmutable $date
+     * @return $this
+     */
+    public static function closing($amount, $date)
     {
         return new self(self::TYPE_CLOSING, $amount, $date);
     }
 
-    public static function closingAvailable(Money $amount, DateTimeImmutable $date): self
+    /**
+     * @param \Money\Money $amount
+     * @param \DateTimeImmutable $date
+     * @return $this
+     */
+    public static function closingAvailable($amount, $date)
     {
         return new self(self::TYPE_CLOSING_AVAILABLE, $amount, $date);
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt;
 
 use DOMDocument;
@@ -11,22 +9,36 @@ use SimpleXMLElement;
 
 class Decoder implements DecoderInterface
 {
-    private SimpleXMLElement $document;
+    /**
+     * @var \SimpleXMLElement
+     */
+    private $document;
 
-    private Decoder\Message $messageDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\Message
+     */
+    private $messageDecoder;
 
     /**
      * Path to the schema definition.
+     * @var string
      */
-    protected string $schemeDefinitionPath;
+    protected $schemeDefinitionPath;
 
-    public function __construct(Decoder\Message $messageDecoder, string $schemeDefinitionPath)
+    /**
+     * @param string $schemeDefinitionPath
+     */
+    public function __construct(Decoder\Message $messageDecoder, $schemeDefinitionPath)
     {
+        $schemeDefinitionPath = (string) $schemeDefinitionPath;
         $this->messageDecoder = $messageDecoder;
         $this->schemeDefinitionPath = $schemeDefinitionPath;
     }
 
-    private function validate(DOMDocument $document): void
+    /**
+     * @return void
+     */
+    private function validate(DOMDocument $document)
     {
         libxml_use_internal_errors(true);
         $valid = $document->schemaValidate(dirname(__DIR__) . $this->schemeDefinitionPath);
@@ -45,7 +57,12 @@ class Decoder implements DecoderInterface
         }
     }
 
-    public function decode(DOMDocument $document, bool $xsdValidation = true): Message
+    /**
+     * @param \DOMDocument $document
+     * @param bool $xsdValidation
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    public function decode($document, $xsdValidation = true)
     {
         if ($xsdValidation === true) {
             $this->validate($document);

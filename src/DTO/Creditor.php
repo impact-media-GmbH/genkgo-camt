@@ -1,28 +1,47 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class Creditor implements RelatedPartyTypeInterface
 {
-    private ?Address $address = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Address|null
+     */
+    private $address;
+    /**
+     * @var string|null
+     */
+    private $name;
 
-    public function __construct(private ?string $name)
+    /**
+     * @param string|null $name
+     */
+    public function __construct($name)
     {
+        $this->name = $name;
     }
 
-    public function setAddress(Address $address): void
+    /**
+     * @param \Genkgo\Camt\DTO\Address $address
+     * @return void
+     */
+    public function setAddress($address)
     {
         $this->address = $address;
     }
 
-    public function getAddress(): ?Address
+    /**
+     * @return \Genkgo\Camt\DTO\Address|null
+     */
+    public function getAddress()
     {
         return $this->address;
     }
 
-    public function getName(): ?string
+    /**
+     * @return string|null
+     */
+    public function getName()
     {
         return $this->name;
     }

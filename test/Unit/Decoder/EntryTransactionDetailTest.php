@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Decoder;
 
 use Genkgo\Camt\Camt053;
@@ -13,7 +11,10 @@ use SimpleXMLElement;
 
 class EntryTransactionDetailTest extends Framework\TestCase
 {
-    public function testItDoesNotAddReferenceIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddReferenceIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -26,7 +27,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addReference($detail, $xmlDetail);
     }
 
-    public function testItAddsReferenceIfItIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsReferenceIfItIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -38,7 +42,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addReference($detail, $this->getXmlDetail());
     }
 
-    public function testItDoesNotAddAdditionalTransactionInformationIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddAdditionalTransactionInformationIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -51,7 +58,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addAdditionalTransactionInformation($detail, $xmlDetail);
     }
 
-    public function testItAddsAdditionalTransactionInformationIfItIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsAdditionalTransactionInformationIfItIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -63,7 +73,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addAdditionalTransactionInformation($detail, $this->getXmlDetail());
     }
 
-    public function testItDoesNotAddRemittanceInformationIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddRemittanceInformationIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -76,7 +89,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRemittanceInformation($detail, $xmlDetail);
     }
 
-    public function testItAddsRemittanceInformationAndCreditorReferenceIfItIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsRemittanceInformationAndCreditorReferenceIfItIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -88,7 +104,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRemittanceInformation($detail, $this->getXmlDetail());
     }
 
-    public function testItAddsRemittanceInformationIfItIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsRemittanceInformationIfItIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -102,7 +121,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRemittanceInformation($detail, $xmlDetail);
     }
 
-    public function testItDoesNotAddReturnInformationIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddReturnInformationIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -115,7 +137,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addReturnInformation($detail, $xmlDetail);
     }
 
-    public function testItAddsReturnInformationIfItIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsReturnInformationIfItIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -127,7 +152,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addReturnInformation($detail, $this->getXmlDetail());
     }
 
-    public function testItDoesNotAddRelatedPartiesIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddRelatedPartiesIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -140,7 +168,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRelatedParties($detail, $xmlDetail);
     }
 
-    public function testItAddsRelatedPartiesIfIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsRelatedPartiesIfIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -152,7 +183,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRelatedParties($detail, $this->getXmlDetail());
     }
 
-    public function testItDoesNotAddRelatedDatesIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddRelatedDatesIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -165,7 +199,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRelatedDates($detail, $xmlDetail);
     }
 
-    public function testItAddsRelatedDatesIfIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsRelatedDatesIfIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -177,7 +214,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addRelatedDates($detail, $this->getXmlDetail());
     }
 
-    public function testItDoesNotAddChargesIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddChargesIfThereIsNoneInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -190,7 +230,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addCharges($detail, $xmlDetail);
     }
 
-    public function testItAddsChargesIfIsPresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsChargesIfIsPresentInXml()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -202,7 +245,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addCharges($detail, $this->getXmlDetail());
     }
 
-    public function testItAddsAmountDetailsIfIsPresentInXmsl(): void
+    /**
+     * @return void
+     */
+    public function testItAddsAmountDetailsIfIsPresentInXmsl()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -215,7 +261,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addAmountDetails($detail, $this->getXmlDetail(), $CdtDbtInd);
     }
 
-    public function testItAddsAmountIfIsPresentInXmsl(): void
+    /**
+     * @return void
+     */
+    public function testItAddsAmountIfIsPresentInXmsl()
     {
         $detail = $this->createMock(DTO\EntryTransactionDetail::class);
 
@@ -228,7 +277,10 @@ class EntryTransactionDetailTest extends Framework\TestCase
         (new Camt053\Decoder\EntryTransactionDetail(new Date()))->addAmount($detail, $this->getXmlDetail(), $CdtDbtInd);
     }
 
-    private function getXmlDetail(): SimpleXMLElement
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getXmlDetail()
     {
         $xmlContent = <<<XML
 <content>

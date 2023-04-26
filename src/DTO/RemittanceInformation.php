@@ -1,26 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class RemittanceInformation
 {
-    private ?string $message = null;
+    /**
+     * @var string|null
+     */
+    private $message;
 
-    private ?CreditorReferenceInformation $creditorReferenceInformation = null;
+    /**
+     * @var \Genkgo\Camt\DTO\CreditorReferenceInformation|null
+     */
+    private $creditorReferenceInformation;
 
     /**
      * @var StructuredRemittanceInformation[]
      */
-    private array $structuredBlocks = [];
+    private $structuredBlocks = [];
 
     /**
      * @var UnstructuredRemittanceInformation[]
      */
-    private array $unstructuredBlocks = [];
+    private $unstructuredBlocks = [];
 
-    public static function fromUnstructured(string $message): self
+    /**
+     * @param string $message
+     * @return $this
+     */
+    public static function fromUnstructured($message)
     {
         $information = new self();
         $information->message = $message;
@@ -28,12 +36,19 @@ class RemittanceInformation
         return $information;
     }
 
-    public function getCreditorReferenceInformation(): ?CreditorReferenceInformation
+    /**
+     * @return \Genkgo\Camt\DTO\CreditorReferenceInformation|null
+     */
+    public function getCreditorReferenceInformation()
     {
         return $this->creditorReferenceInformation;
     }
 
-    public function setCreditorReferenceInformation(CreditorReferenceInformation $creditorReferenceInformation): void
+    /**
+     * @param \Genkgo\Camt\DTO\CreditorReferenceInformation $creditorReferenceInformation
+     * @return void
+     */
+    public function setCreditorReferenceInformation($creditorReferenceInformation)
     {
         $this->creditorReferenceInformation = $creditorReferenceInformation;
         $this->message = $creditorReferenceInformation->getRef();
@@ -41,21 +56,28 @@ class RemittanceInformation
 
     /**
      * @deprecated Use getStructuredBlocks method instead
+     * @return string|null
      */
-    public function getMessage(): ?string
+    public function getMessage()
     {
         return $this->message;
     }
 
     /**
      * @deprecated Use addStructuredBlock method instead
+     * @param string $message
+     * @return void
      */
-    public function setMessage(string $message): void
+    public function setMessage($message)
     {
         $this->message = $message;
     }
 
-    public function addStructuredBlock(StructuredRemittanceInformation $structuredRemittanceInformation): void
+    /**
+     * @param \Genkgo\Camt\DTO\StructuredRemittanceInformation $structuredRemittanceInformation
+     * @return void
+     */
+    public function addStructuredBlock($structuredRemittanceInformation)
     {
         $this->structuredBlocks[] = $structuredRemittanceInformation;
     }
@@ -63,12 +85,15 @@ class RemittanceInformation
     /**
      * @return StructuredRemittanceInformation[]
      */
-    public function getStructuredBlocks(): array
+    public function getStructuredBlocks()
     {
         return $this->structuredBlocks;
     }
 
-    public function getStructuredBlock(): ?StructuredRemittanceInformation
+    /**
+     * @return \Genkgo\Camt\DTO\StructuredRemittanceInformation|null
+     */
+    public function getStructuredBlock()
     {
         if (isset($this->structuredBlocks[0])) {
             return $this->structuredBlocks[0];
@@ -77,7 +102,11 @@ class RemittanceInformation
         return null;
     }
 
-    public function addUnstructuredBlock(UnstructuredRemittanceInformation $unstructuredRemittanceInformation): void
+    /**
+     * @param \Genkgo\Camt\DTO\UnstructuredRemittanceInformation $unstructuredRemittanceInformation
+     * @return void
+     */
+    public function addUnstructuredBlock($unstructuredRemittanceInformation)
     {
         $this->unstructuredBlocks[] = $unstructuredRemittanceInformation;
     }
@@ -85,12 +114,15 @@ class RemittanceInformation
     /**
      * @return UnstructuredRemittanceInformation[]
      */
-    public function getUnstructuredBlocks(): array
+    public function getUnstructuredBlocks()
     {
         return $this->unstructuredBlocks;
     }
 
-    public function getUnstructuredBlock(): ?UnstructuredRemittanceInformation
+    /**
+     * @return \Genkgo\Camt\DTO\UnstructuredRemittanceInformation|null
+     */
+    public function getUnstructuredBlock()
     {
         if (isset($this->unstructuredBlocks[0])) {
             return $this->unstructuredBlocks[0];

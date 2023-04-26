@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use Genkgo\Camt\Config;
@@ -11,23 +9,34 @@ use PHPUnit\Framework\TestCase;
 
 class RegressionTest extends TestCase
 {
-    private string $timezone;
+    /**
+     * @var string
+     */
+    private $timezone;
 
-    protected function setUp(): void
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
         $this->timezone = date_default_timezone_get();
         date_default_timezone_set('UTC');
     }
 
-    protected function tearDown(): void
+    /**
+     * @return void
+     */
+    protected function tearDown()
     {
         date_default_timezone_set($this->timezone);
     }
 
     /**
      * @dataProvider providerRegression
+     * @param string $file
+     * @return void
      */
-    public function testRegression(string $file): void
+    public function testRegression($file)
     {
         $reader = new Reader(Config::getDefault());
         $message = $reader->readFile($file);
@@ -41,9 +50,14 @@ class RegressionTest extends TestCase
 
     /**
      * Custom assert that will not produce gigantic diff.
+     * @return void
+     * @param string $file
+     * @param string $actualContent
      */
-    private function assertFile(string $file, string $actualContent): void
+    private function assertFile($file, $actualContent)
     {
+        $file = (string) $file;
+        $actualContent = (string) $actualContent;
         // Log actual result for easier comparison with external diff tools
         $logFile = 'logs/' . $file;
         $dir = dirname($logFile);
@@ -56,7 +70,10 @@ class RegressionTest extends TestCase
         Assert::assertTrue($expected === $actualContent, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
     }
 
-    public static function providerRegression(): iterable
+    /**
+     * @return mixed[]
+     */
+    public static function providerRegression()
     {
         yield ['test/data/camt052.v1.xml'];
         yield ['test/data/camt052.v2.other-account.xml'];

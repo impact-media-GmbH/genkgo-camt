@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use DOMDocument;
@@ -14,7 +12,10 @@ use PHPUnit\Framework;
 
 class ReaderTest extends Framework\TestCase
 {
-    protected function getDefaultConfig(): Config
+    /**
+     * @return \Genkgo\Camt\Config
+     */
+    protected function getDefaultConfig()
     {
         $config = new Config();
         $config->addMessageFormat(new MessageFormat\V02());
@@ -22,14 +23,20 @@ class ReaderTest extends Framework\TestCase
         return $config;
     }
 
-    public function testReadEmptyDocument(): void
+    /**
+     * @return void
+     */
+    public function testReadEmptyDocument()
     {
         $this->expectException(ReaderException::class);
         $reader = new Reader($this->getDefaultConfig());
         $reader->readDom(new DOMDocument('1.0', 'UTF-8'));
     }
 
-    public function testReadWrongFormat(): void
+    /**
+     * @return void
+     */
+    public function testReadWrongFormat()
     {
         $this->expectException(ReaderException::class);
 
@@ -42,14 +49,20 @@ class ReaderTest extends Framework\TestCase
         $reader->readDom($dom);
     }
 
-    public function testReadFile(): void
+    /**
+     * @return void
+     */
+    public function testReadFile()
     {
         $reader = new Reader(Config::getDefault());
         $message = $reader->readFile('test/data/camt053.v2.minimal.xml');
         self::assertInstanceOf(DTO\Message::class, $message);
     }
 
-    public function testReadFileWithNoXsdValidation(): void
+    /**
+     * @return void
+     */
+    public function testReadFileWithNoXsdValidation()
     {
         $config = Config::getDefault();
         $config->disableXsdValidation();

@@ -1,172 +1,300 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class OrganisationIdentification extends Identification
 {
-    private ?string $bic = null;
+    /**
+     * @var string|null
+     */
+    private $bic;
 
-    private ?string $ibei = null;
+    /**
+     * @var string|null
+     */
+    private $ibei;
 
-    private ?string $bei = null;
+    /**
+     * @var string|null
+     */
+    private $bei;
 
-    private ?string $eangln = null;
+    /**
+     * @var string|null
+     */
+    private $eangln;
 
-    private ?string $chipsUniversalId = null;
+    /**
+     * @var string|null
+     */
+    private $chipsUniversalId;
 
-    private ?string $duns = null;
+    /**
+     * @var string|null
+     */
+    private $duns;
 
-    private ?string $bankPartyId = null;
+    /**
+     * @var string|null
+     */
+    private $bankPartyId;
 
-    private ?string $taxId = null;
+    /**
+     * @var string|null
+     */
+    private $taxId;
 
-    private ?string $issuer = null;
+    /**
+     * @var string|null
+     */
+    private $issuer;
 
-    private ?string $otherId = null;
+    /**
+     * @var string|null
+     */
+    private $otherId;
 
-    private ?string $otherIssuer = null;
+    /**
+     * @var string|null
+     */
+    private $otherIssuer;
 
-    private ?string $otherSchemeName = null;
+    /**
+     * @var string|null
+     */
+    private $otherSchemeName;
 
-    private ?string $otherType = null;
+    /**
+     * @var string|null
+     */
+    private $otherType;
 
-    public function getBic(): ?string
+    /**
+     * @return string|null
+     */
+    public function getBic()
     {
         return $this->bic;
     }
 
-    public function setBic(string $bic): void
+    /**
+     * @param string $bic
+     * @return void
+     */
+    public function setBic($bic)
     {
         $this->bic = $bic;
         $this->identification = $bic;
     }
 
-    public function getIbei(): ?string
+    /**
+     * @return string|null
+     */
+    public function getIbei()
     {
         return $this->ibei;
     }
 
-    public function setIbei(string $ibei): void
+    /**
+     * @param string $ibei
+     * @return void
+     */
+    public function setIbei($ibei)
     {
         $this->ibei = $ibei;
         $this->identification = $ibei;
     }
 
-    public function getBei(): ?string
+    /**
+     * @return string|null
+     */
+    public function getBei()
     {
         return $this->bei;
     }
 
-    public function setBei(string $bei): void
+    /**
+     * @param string $bei
+     * @return void
+     */
+    public function setBei($bei)
     {
         $this->bei = $bei;
         $this->identification = $bei;
     }
 
-    public function getEangln(): ?string
+    /**
+     * @return string|null
+     */
+    public function getEangln()
     {
         return $this->eangln;
     }
 
-    public function setEangln(string $eangln): void
+    /**
+     * @param string $eangln
+     * @return void
+     */
+    public function setEangln($eangln)
     {
         $this->eangln = $eangln;
         $this->identification = $eangln;
     }
 
-    public function getChipsUniversalId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getChipsUniversalId()
     {
         return $this->chipsUniversalId;
     }
 
-    public function setChipsUniversalId(string $chipsUniversalId): void
+    /**
+     * @param string $chipsUniversalId
+     * @return void
+     */
+    public function setChipsUniversalId($chipsUniversalId)
     {
         $this->chipsUniversalId = $chipsUniversalId;
         $this->identification = $chipsUniversalId;
     }
 
-    public function getDuns(): ?string
+    /**
+     * @return string|null
+     */
+    public function getDuns()
     {
         return $this->duns;
     }
 
-    public function setDuns(string $duns): void
+    /**
+     * @param string $duns
+     * @return void
+     */
+    public function setDuns($duns)
     {
         $this->duns = $duns;
         $this->identification = $duns;
     }
 
-    public function getBankPartyId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getBankPartyId()
     {
         return $this->bankPartyId;
     }
 
-    public function setBankPartyId(string $bankPartyId): void
+    /**
+     * @param string $bankPartyId
+     * @return void
+     */
+    public function setBankPartyId($bankPartyId)
     {
         $this->bankPartyId = $bankPartyId;
         $this->identification = $bankPartyId;
     }
 
-    public function getTaxId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getTaxId()
     {
         return $this->taxId;
     }
 
-    public function setTaxId(string $taxId): void
+    /**
+     * @param string $taxId
+     * @return void
+     */
+    public function setTaxId($taxId)
     {
         $this->taxId = $taxId;
         $this->identification = $taxId;
     }
 
-    public function getOtherId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getOtherId()
     {
         return $this->otherId;
     }
 
-    public function setOtherId(string $otherId): void
+    /**
+     * @param string $otherId
+     * @return void
+     */
+    public function setOtherId($otherId)
     {
         $this->otherId = $otherId;
         $this->identification = $otherId;
     }
 
-    public function getOtherIssuer(): ?string
+    /**
+     * @return string|null
+     */
+    public function getOtherIssuer()
     {
         return $this->otherIssuer;
     }
 
-    public function setOtherIssuer(string $otherIssuer): void
+    /**
+     * @param string $otherIssuer
+     * @return void
+     */
+    public function setOtherIssuer($otherIssuer)
     {
         $this->otherIssuer = $otherIssuer;
     }
 
-    public function getOtherSchemeName(): ?string
+    /**
+     * @return string|null
+     */
+    public function getOtherSchemeName()
     {
         return $this->otherSchemeName;
     }
 
-    public function setOtherSchemeName(string $otherSchemeName): void
+    /**
+     * @param string $otherSchemeName
+     * @return void
+     */
+    public function setOtherSchemeName($otherSchemeName)
     {
         $this->otherSchemeName = $otherSchemeName;
     }
 
-    public function getOtherType(): ?string
+    /**
+     * @return string|null
+     */
+    public function getOtherType()
     {
         return $this->otherType;
     }
 
-    public function setOtherType(string $otherType): void
+    /**
+     * @param string $otherType
+     * @return void
+     */
+    public function setOtherType($otherType)
     {
         $this->otherType = $otherType;
     }
 
-    public function getIssuer(): ?string
+    /**
+     * @return string|null
+     */
+    public function getIssuer()
     {
         return $this->issuer;
     }
 
-    public function setIssuer(string $issuer): void
+    /**
+     * @param string $issuer
+     * @return void
+     */
+    public function setIssuer($issuer)
     {
         $this->issuer = $issuer;
         $this->identification = $issuer;

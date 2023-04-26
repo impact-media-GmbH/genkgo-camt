@@ -23,15 +23,15 @@ use Iban\Validation\Swift\Registry;
  */
 class Iban
 {
-    public const FORMAT_ELECTRONIC = 'electronic';
-    public const FORMAT_PRINT = 'print';
-    public const FORMAT_ANONYMIZED = 'anonymized';
+    const FORMAT_ELECTRONIC = 'electronic';
+    const FORMAT_PRINT = 'print';
+    const FORMAT_ANONYMIZED = 'anonymized';
 
-    private const COUNTRY_CODE_OFFSET = 0;
-    private const COUNTRY_CODE_LENGTH = 2;
-    private const CHECKSUM_OFFSET = 2;
-    private const CHECKSUM_LENGTH = 2;
-    private const BBAN_OFFSET = 4;
+    const COUNTRY_CODE_OFFSET = 0;
+    const COUNTRY_CODE_LENGTH = 2;
+    const CHECKSUM_OFFSET = 2;
+    const CHECKSUM_LENGTH = 2;
+    const BBAN_OFFSET = 4;
 
     /**
      * @var string
@@ -98,7 +98,7 @@ class Iban
         return substr($this->getNormalizedIban(), self::COUNTRY_CODE_OFFSET, self::COUNTRY_CODE_LENGTH);
     }
 
-    public function countryCode(): string
+    public function countryCode()
     {
         return substr($this->getNormalizedIban(), self::COUNTRY_CODE_OFFSET, self::COUNTRY_CODE_LENGTH);
     }
@@ -114,7 +114,7 @@ class Iban
         return substr($this->getNormalizedIban(), self::CHECKSUM_OFFSET, self::CHECKSUM_LENGTH);
     }
 
-    public function checksum(): string
+    public function checksum()
     {
         return substr($this->getNormalizedIban(), self::CHECKSUM_OFFSET, self::CHECKSUM_LENGTH);
     }
@@ -130,7 +130,7 @@ class Iban
         return substr($this->getNormalizedIban(), self::BBAN_OFFSET);
     }
 
-    public function bban(): string
+    public function bban()
     {
         return substr($this->getNormalizedIban(), self::BBAN_OFFSET);
     }
@@ -152,7 +152,7 @@ class Iban
         );
     }
 
-    public function bbanBankIdentifier(): string
+    public function bbanBankIdentifier()
     {
         $registry = new Registry(new PhpRegistryLoader());
 

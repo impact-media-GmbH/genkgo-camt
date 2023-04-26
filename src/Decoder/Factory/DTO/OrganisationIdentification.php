@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder\Factory\DTO;
 
 use Genkgo\Camt\DTO;
@@ -11,7 +9,11 @@ class OrganisationIdentification
 {
     use Behavior\Mapping;
 
-    public static function createFromXml(SimpleXMLElement $xmlOrganisationIdentification): DTO\OrganisationIdentification
+    /**
+     * @param \SimpleXMLElement $xmlOrganisationIdentification
+     * @return \Genkgo\Camt\DTO\OrganisationIdentification
+     */
+    public static function createFromXml($xmlOrganisationIdentification)
     {
         $mapping = [
             ['setter' => 'setBic', 'value' => 'BIC'],

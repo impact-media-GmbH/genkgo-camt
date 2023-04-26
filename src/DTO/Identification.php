@@ -1,19 +1,27 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 abstract class Identification
 {
-    protected ?string $identification = null;
+    /**
+     * @var string|null
+     */
+    protected $identification;
 
-    public function getIdentification(): ?string
+    /**
+     * @return string|null
+     */
+    public function getIdentification()
     {
         return $this->identification;
     }
 
-    public function setIdentification(string $identification): void
+    /**
+     * @param string $identification
+     * @return void
+     */
+    public function setIdentification($identification)
     {
         $this->identification = $identification;
     }

@@ -1,121 +1,208 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use DateTimeImmutable;
 
 abstract class Record
 {
-    protected string $id;
+    /**
+     * @var string
+     */
+    protected $id;
 
-    protected DateTimeImmutable $createdOn;
+    /**
+     * @var \DateTimeImmutable
+     */
+    protected $createdOn;
 
-    protected Account $account;
+    /**
+     * @var \Genkgo\Camt\DTO\Account
+     */
+    protected $account;
 
-    protected ?Pagination $pagination = null;
+    /**
+     * @var \Genkgo\Camt\DTO\Pagination|null
+     */
+    protected $pagination;
 
-    protected ?string $electronicSequenceNumber = null;
+    /**
+     * @var string|null
+     */
+    protected $electronicSequenceNumber;
 
-    protected ?string $legalSequenceNumber = null;
+    /**
+     * @var string|null
+     */
+    protected $legalSequenceNumber;
 
-    protected ?string $copyDuplicateIndicator = null;
+    /**
+     * @var string|null
+     */
+    protected $copyDuplicateIndicator;
 
-    protected ?DateTimeImmutable $fromDate = null;
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    protected $fromDate;
 
-    protected ?DateTimeImmutable $toDate = null;
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    protected $toDate;
 
     /**
      * @var Entry[]
      */
     protected $entries = [];
 
-    protected ?string $additionalInformation = null;
+    /**
+     * @var string|null
+     */
+    protected $additionalInformation;
 
-    public function __construct(string $id, DateTimeImmutable $createdOn, Account $account)
+    /**
+     * @param string $id
+     */
+    public function __construct($id, DateTimeImmutable $createdOn, Account $account)
     {
+        $id = (string) $id;
         $this->id = $id;
         $this->createdOn = $createdOn;
         $this->account = $account;
     }
 
-    public function getId(): string
+    /**
+     * @return string
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getCreatedOn(): DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable
+     */
+    public function getCreatedOn()
     {
         return $this->createdOn;
     }
 
-    public function getAccount(): Account
+    /**
+     * @return \Genkgo\Camt\DTO\Account
+     */
+    public function getAccount()
     {
         return $this->account;
     }
 
-    public function getPagination(): ?Pagination
+    /**
+     * @return \Genkgo\Camt\DTO\Pagination|null
+     */
+    public function getPagination()
     {
         return $this->pagination;
     }
 
-    public function setPagination(Pagination $pagination): void
+    /**
+     * @param \Genkgo\Camt\DTO\Pagination $pagination
+     * @return void
+     */
+    public function setPagination($pagination)
     {
         $this->pagination = $pagination;
     }
 
-    public function getElectronicSequenceNumber(): ?string
+    /**
+     * @return string|null
+     */
+    public function getElectronicSequenceNumber()
     {
         return $this->electronicSequenceNumber;
     }
 
-    public function setElectronicSequenceNumber(string $electronicSequenceNumber): void
+    /**
+     * @param string $electronicSequenceNumber
+     * @return void
+     */
+    public function setElectronicSequenceNumber($electronicSequenceNumber)
     {
         $this->electronicSequenceNumber = $electronicSequenceNumber;
     }
 
-    public function getLegalSequenceNumber(): ?string
+    /**
+     * @return string|null
+     */
+    public function getLegalSequenceNumber()
     {
         return $this->legalSequenceNumber;
     }
 
-    public function setLegalSequenceNumber(string $legalSequenceNumber): void
+    /**
+     * @param string $legalSequenceNumber
+     * @return void
+     */
+    public function setLegalSequenceNumber($legalSequenceNumber)
     {
         $this->legalSequenceNumber = $legalSequenceNumber;
     }
 
-    public function getCopyDuplicateIndicator(): ?string
+    /**
+     * @return string|null
+     */
+    public function getCopyDuplicateIndicator()
     {
         return $this->copyDuplicateIndicator;
     }
 
-    public function setCopyDuplicateIndicator(string $copyDuplicateIndicator): void
+    /**
+     * @param string $copyDuplicateIndicator
+     * @return void
+     */
+    public function setCopyDuplicateIndicator($copyDuplicateIndicator)
     {
         $this->copyDuplicateIndicator = $copyDuplicateIndicator;
     }
 
-    public function getFromDate(): ?DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getFromDate()
     {
         return $this->fromDate;
     }
 
-    public function setFromDate(DateTimeImmutable $fromDate): void
+    /**
+     * @param \DateTimeImmutable $fromDate
+     * @return void
+     */
+    public function setFromDate($fromDate)
     {
         $this->fromDate = $fromDate;
     }
 
-    public function getToDate(): ?DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getToDate()
     {
         return $this->toDate;
     }
 
-    public function setToDate(DateTimeImmutable $toDate): void
+    /**
+     * @param \DateTimeImmutable $toDate
+     * @return void
+     */
+    public function setToDate($toDate)
     {
         $this->toDate = $toDate;
     }
 
-    public function addEntry(Entry $entry): void
+    /**
+     * @param \Genkgo\Camt\DTO\Entry $entry
+     * @return void
+     */
+    public function addEntry($entry)
     {
         $this->entries[] = $entry;
     }
@@ -123,17 +210,24 @@ abstract class Record
     /**
      * @return Entry[]
      */
-    public function getEntries(): array
+    public function getEntries()
     {
         return $this->entries;
     }
 
-    public function getAdditionalInformation(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAdditionalInformation()
     {
         return $this->additionalInformation;
     }
 
-    public function setAdditionalInformation(string $additionalInformation): void
+    /**
+     * @param string $additionalInformation
+     * @return void
+     */
+    public function setAdditionalInformation($additionalInformation)
     {
         $this->additionalInformation = $additionalInformation;
     }

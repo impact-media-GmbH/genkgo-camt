@@ -18,8 +18,8 @@ namespace Iban\Validation\Swift;
  */
 final class PhpRegistryLoader implements RegistryLoaderInterface
 {
-    public function load(): array
+    public function load()
     {
-        return require dirname(__DIR__, 2) . '/Resource/iban_registry_202009r88.php';
+        return require dirname(dirname(__DIR__)) . '/Resource/iban_registry_202009r88.php';
     }
 }

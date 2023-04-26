@@ -1,37 +1,61 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class DomainFamilyBankTransactionCode
 {
-    private string $code;
+    /**
+     * @var string
+     */
+    private $code;
 
-    private string $subFamilyCode;
+    /**
+     * @var string
+     */
+    private $subFamilyCode;
 
-    public function __construct(string $code, string $subFamilyCode)
+    /**
+     * @param string $code
+     * @param string $subFamilyCode
+     */
+    public function __construct($code, $subFamilyCode)
     {
+        $code = (string) $code;
+        $subFamilyCode = (string) $subFamilyCode;
         $this->code = $code;
         $this->subFamilyCode = $subFamilyCode;
     }
 
-    public function getCode(): string
+    /**
+     * @return string
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setCode(string $code): void
+    /**
+     * @param string $code
+     * @return void
+     */
+    public function setCode($code)
     {
         $this->code = $code;
     }
 
-    public function getSubFamilyCode(): string
+    /**
+     * @return string
+     */
+    public function getSubFamilyCode()
     {
         return $this->subFamilyCode;
     }
 
-    public function setSubFamilyCode(string $issuer): void
+    /**
+     * @param string $issuer
+     * @return void
+     */
+    public function setSubFamilyCode($issuer)
     {
         $this->subFamilyCode = $issuer;
     }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 /**
@@ -9,11 +7,24 @@ namespace Genkgo\Camt\DTO;
  */
 interface RelatedPartyTypeInterface
 {
-    public function __construct(?string $name);
+    /**
+     * @param string|null $name
+     */
+    public function __construct($name);
 
-    public function setAddress(Address $address): void;
+    /**
+     * @param \Genkgo\Camt\DTO\Address $address
+     * @return void
+     */
+    public function setAddress($address);
 
-    public function getAddress(): ?Address;
+    /**
+     * @return \Genkgo\Camt\DTO\Address|null
+     */
+    public function getAddress();
 
-    public function getName(): ?string;
+    /**
+     * @return string|null
+     */
+    public function getName();
 }

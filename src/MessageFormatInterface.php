@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt;
 
 /**
@@ -9,11 +7,23 @@ namespace Genkgo\Camt;
  */
 interface MessageFormatInterface
 {
-    public function getXmlNs(): string;
+    /**
+     * @return string
+     */
+    public function getXmlNs();
 
-    public function getMsgId(): string;
+    /**
+     * @return string
+     */
+    public function getMsgId();
 
-    public function getName(): string;
+    /**
+     * @return string
+     */
+    public function getName();
 
-    public function getDecoder(): DecoderInterface;
+    /**
+     * @return \Genkgo\Camt\DecoderInterface
+     */
+    public function getDecoder();
 }

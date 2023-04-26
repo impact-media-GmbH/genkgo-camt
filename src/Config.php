@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt;
 
 use Genkgo\Camt\Camt052;
@@ -13,11 +11,18 @@ class Config
     /**
      * @var MessageFormatInterface[]
      */
-    private array $messageFormats = [];
+    private $messageFormats = [];
 
-    private bool $xsdValidation = true;
+    /**
+     * @var bool
+     */
+    private $xsdValidation = true;
 
-    public function addMessageFormat(MessageFormatInterface $messageFormat): void
+    /**
+     * @param \Genkgo\Camt\MessageFormatInterface $messageFormat
+     * @return void
+     */
+    public function addMessageFormat($messageFormat)
     {
         $this->messageFormats[] = $messageFormat;
     }
@@ -25,22 +30,31 @@ class Config
     /**
      * @return MessageFormatInterface[]
      */
-    public function getMessageFormats(): array
+    public function getMessageFormats()
     {
         return $this->messageFormats;
     }
 
-    public function disableXsdValidation(): void
+    /**
+     * @return void
+     */
+    public function disableXsdValidation()
     {
         $this->xsdValidation = false;
     }
 
-    public function getXsdValidation(): bool
+    /**
+     * @return bool
+     */
+    public function getXsdValidation()
     {
         return $this->xsdValidation;
     }
 
-    public static function getDefault(): self
+    /**
+     * @return $this
+     */
+    public static function getDefault()
     {
         $config = new self();
         $config->addMessageFormat(new Camt052\MessageFormat\V01());

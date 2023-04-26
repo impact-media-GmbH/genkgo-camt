@@ -1,98 +1,173 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class Reference
 {
-    private ?string $messageId = null;
+    /**
+     * @var string|null
+     */
+    private $messageId;
 
-    private ?string $accountServicerReference = null;
+    /**
+     * @var string|null
+     */
+    private $accountServicerReference;
 
-    private ?string $paymentInformationId = null;
+    /**
+     * @var string|null
+     */
+    private $paymentInformationId;
 
-    private ?string $instructionId = null;
+    /**
+     * @var string|null
+     */
+    private $instructionId;
 
-    private ?string $endToEndId = null;
+    /**
+     * @var string|null
+     */
+    private $endToEndId;
 
-    private ?string $uuidEndToEndReference = null;
+    /**
+     * @var string|null
+     */
+    private $uuidEndToEndReference;
 
-    private ?string $transactionId = null;
+    /**
+     * @var string|null
+     */
+    private $transactionId;
 
-    private ?string $mandateId = null;
+    /**
+     * @var string|null
+     */
+    private $mandateId;
 
-    private ?string $chequeNumber = null;
+    /**
+     * @var string|null
+     */
+    private $chequeNumber;
 
-    private ?string $clearingSystemReference = null;
+    /**
+     * @var string|null
+     */
+    private $clearingSystemReference;
 
-    private ?string $accountOwnerTransactionId = null;
+    /**
+     * @var string|null
+     */
+    private $accountOwnerTransactionId;
 
-    private ?string $accountServicerTransactionId = null;
+    /**
+     * @var string|null
+     */
+    private $accountServicerTransactionId;
 
-    private ?string $marketInfrastructureTransactionId = null;
+    /**
+     * @var string|null
+     */
+    private $marketInfrastructureTransactionId;
 
-    private ?string $processingId = null;
+    /**
+     * @var string|null
+     */
+    private $processingId;
 
     /**
      * @var ProprietaryReference[]
      */
-    private array $proprietaries = [];
+    private $proprietaries = [];
 
-    public function getMessageId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getMessageId()
     {
         return $this->messageId;
     }
 
-    public function setMessageId(?string $messageId): self
+    /**
+     * @param string|null $messageId
+     * @return $this
+     */
+    public function setMessageId($messageId)
     {
         $this->messageId = $messageId;
 
         return $this;
     }
 
-    public function getAccountServicerReference(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAccountServicerReference()
     {
         return $this->accountServicerReference;
     }
 
-    public function setAccountServicerReference(?string $accountServicerReference): self
+    /**
+     * @param string|null $accountServicerReference
+     * @return $this
+     */
+    public function setAccountServicerReference($accountServicerReference)
     {
         $this->accountServicerReference = $accountServicerReference;
 
         return $this;
     }
 
-    public function getPaymentInformationId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getPaymentInformationId()
     {
         return $this->paymentInformationId;
     }
 
-    public function setPaymentInformationId(?string $paymentInformationId): self
+    /**
+     * @param string|null $paymentInformationId
+     * @return $this
+     */
+    public function setPaymentInformationId($paymentInformationId)
     {
         $this->paymentInformationId = $paymentInformationId;
 
         return $this;
     }
 
-    public function getInstructionId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getInstructionId()
     {
         return $this->instructionId;
     }
 
-    public function setInstructionId(?string $instructionId): self
+    /**
+     * @param string|null $instructionId
+     * @return $this
+     */
+    public function setInstructionId($instructionId)
     {
         $this->instructionId = $instructionId;
 
         return $this;
     }
 
-    public function getEndToEndId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getEndToEndId()
     {
         return $this->endToEndId;
     }
 
-    public function setEndToEndId(?string $endToEndId): self
+    /**
+     * @param string|null $endToEndId
+     * @return $this
+     */
+    public function setEndToEndId($endToEndId)
     {
         $this->endToEndId = $endToEndId;
 
@@ -101,114 +176,179 @@ class Reference
 
     /**
      * Universally unique identifier to provide an end-to-end reference of a payment transaction.
+     * @return string|null
      */
-    public function getUuidEndToEndReference(): ?string
+    public function getUuidEndToEndReference()
     {
         return $this->uuidEndToEndReference;
     }
 
-    public function setUuidEndToEndReference(?string $uuidEndToEndReference): void
+    /**
+     * @param string|null $uuidEndToEndReference
+     * @return void
+     */
+    public function setUuidEndToEndReference($uuidEndToEndReference)
     {
         $this->uuidEndToEndReference = $uuidEndToEndReference;
     }
 
-    public function getTransactionId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getTransactionId()
     {
         return $this->transactionId;
     }
 
-    public function setTransactionId(?string $transactionId): self
+    /**
+     * @param string|null $transactionId
+     * @return $this
+     */
+    public function setTransactionId($transactionId)
     {
         $this->transactionId = $transactionId;
 
         return $this;
     }
 
-    public function getMandateId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getMandateId()
     {
         return $this->mandateId;
     }
 
-    public function setMandateId(?string $mandateId): self
+    /**
+     * @param string|null $mandateId
+     * @return $this
+     */
+    public function setMandateId($mandateId)
     {
         $this->mandateId = $mandateId;
 
         return $this;
     }
 
-    public function getChequeNumber(): ?string
+    /**
+     * @return string|null
+     */
+    public function getChequeNumber()
     {
         return $this->chequeNumber;
     }
 
-    public function setChequeNumber(?string $chequeNumber): self
+    /**
+     * @param string|null $chequeNumber
+     * @return $this
+     */
+    public function setChequeNumber($chequeNumber)
     {
         $this->chequeNumber = $chequeNumber;
 
         return $this;
     }
 
-    public function getClearingSystemReference(): ?string
+    /**
+     * @return string|null
+     */
+    public function getClearingSystemReference()
     {
         return $this->clearingSystemReference;
     }
 
-    public function setClearingSystemReference(?string $clearingSystemReference): self
+    /**
+     * @param string|null $clearingSystemReference
+     * @return $this
+     */
+    public function setClearingSystemReference($clearingSystemReference)
     {
         $this->clearingSystemReference = $clearingSystemReference;
 
         return $this;
     }
 
-    public function getAccountOwnerTransactionId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAccountOwnerTransactionId()
     {
         return $this->accountOwnerTransactionId;
     }
 
-    public function setAccountOwnerTransactionId(?string $accountOwnerTransactionId): self
+    /**
+     * @param string|null $accountOwnerTransactionId
+     * @return $this
+     */
+    public function setAccountOwnerTransactionId($accountOwnerTransactionId)
     {
         $this->accountOwnerTransactionId = $accountOwnerTransactionId;
 
         return $this;
     }
 
-    public function getAccountServicerTransactionId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getAccountServicerTransactionId()
     {
         return $this->accountServicerTransactionId;
     }
 
-    public function setAccountServicerTransactionId(?string $accountServicerTransactionId): self
+    /**
+     * @param string|null $accountServicerTransactionId
+     * @return $this
+     */
+    public function setAccountServicerTransactionId($accountServicerTransactionId)
     {
         $this->accountServicerTransactionId = $accountServicerTransactionId;
 
         return $this;
     }
 
-    public function getMarketInfrastructureTransactionId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getMarketInfrastructureTransactionId()
     {
         return $this->marketInfrastructureTransactionId;
     }
 
-    public function setMarketInfrastructureTransactionId(?string $marketInfrastructureTransactionId): self
+    /**
+     * @param string|null $marketInfrastructureTransactionId
+     * @return $this
+     */
+    public function setMarketInfrastructureTransactionId($marketInfrastructureTransactionId)
     {
         $this->marketInfrastructureTransactionId = $marketInfrastructureTransactionId;
 
         return $this;
     }
 
-    public function getProcessingId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getProcessingId()
     {
         return $this->processingId;
     }
 
-    public function setProcessingId(?string $processingId): self
+    /**
+     * @param string|null $processingId
+     * @return $this
+     */
+    public function setProcessingId($processingId)
     {
         $this->processingId = $processingId;
 
         return $this;
     }
 
-    public function addProprietary(ProprietaryReference $proprietary): self
+    /**
+     * @param \Genkgo\Camt\DTO\ProprietaryReference $proprietary
+     * @return $this
+     */
+    public function addProprietary($proprietary)
     {
         $this->proprietaries[] = $proprietary;
 
@@ -218,7 +358,7 @@ class Reference
     /**
      * @return ProprietaryReference[]
      */
-    public function getProprietaries(): array
+    public function getProprietaries()
     {
         return $this->proprietaries;
     }

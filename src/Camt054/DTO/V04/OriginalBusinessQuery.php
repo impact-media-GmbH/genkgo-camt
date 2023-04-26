@@ -1,49 +1,77 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt054\DTO\V04;
 
 use DateTimeImmutable;
 
 class OriginalBusinessQuery
 {
-    private string $messageId;
+    /**
+     * @var string
+     */
+    private $messageId;
 
-    private ?string $messageNameId = null;
+    /**
+     * @var string|null
+     */
+    private $messageNameId;
 
-    private ?DateTimeImmutable $createdOn = null;
+    /**
+     * @var \DateTimeImmutable|null
+     */
+    private $createdOn;
 
-    public function __construct(string $messageId)
+    /**
+     * @param string $messageId
+     */
+    public function __construct($messageId)
     {
+        $messageId = (string) $messageId;
         $this->messageId = $messageId;
     }
 
-    public function getMessageId(): string
+    /**
+     * @return string
+     */
+    public function getMessageId()
     {
         return $this->messageId;
     }
 
-    public function getMessageNameId(): ?string
+    /**
+     * @return string|null
+     */
+    public function getMessageNameId()
     {
         return $this->messageNameId;
     }
 
-    public function setMessageNameId(string $messageNameId): self
+    /**
+     * @param string $messageNameId
+     * @return $this
+     */
+    public function setMessageNameId($messageNameId)
     {
         $this->messageNameId = $messageNameId;
 
         return $this;
     }
 
-    public function setCreatedOn(DateTimeImmutable $createdOn): self
+    /**
+     * @param \DateTimeImmutable $createdOn
+     * @return $this
+     */
+    public function setCreatedOn($createdOn)
     {
         $this->createdOn = $createdOn;
 
         return $this;
     }
 
-    public function getCreatedOn(): ?DateTimeImmutable
+    /**
+     * @return \DateTimeImmutable|null
+     */
+    public function getCreatedOn()
     {
         return $this->createdOn;
     }

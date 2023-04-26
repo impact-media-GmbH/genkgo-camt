@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Util;
 
 use Money\Currencies\ISOCurrencies;
@@ -12,14 +10,21 @@ use SimpleXMLElement;
 
 final class MoneyFactory
 {
-    private DecimalMoneyParser $decimalMoneyParser;
+    /**
+     * @var \Money\Parser\DecimalMoneyParser
+     */
+    private $decimalMoneyParser;
 
     public function __construct()
     {
         $this->decimalMoneyParser = new DecimalMoneyParser(new ISOCurrencies());
     }
 
-    public function create(SimpleXMLElement $xmlAmount, ?SimpleXMLElement $CdtDbtInd): Money
+    /**
+     * @param \SimpleXMLElement|null $CdtDbtInd
+     * @return \Money\Money
+     */
+    public function create(SimpleXMLElement $xmlAmount, $CdtDbtInd)
     {
         $amount = (string) $xmlAmount;
 

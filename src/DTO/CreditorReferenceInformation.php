@@ -1,28 +1,46 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class CreditorReferenceInformation
 {
-    private ?string $ref = null;
+    /**
+     * @var string|null
+     */
+    private $ref;
 
-    private ?string $code = null;
+    /**
+     * @var string|null
+     */
+    private $code;
 
-    private ?string $proprietary = null;
+    /**
+     * @var string|null
+     */
+    private $proprietary;
 
-    public function getRef(): ?string
+    /**
+     * @return string|null
+     */
+    public function getRef()
     {
         return $this->ref;
     }
 
-    public function setRef(?string $ref): void
+    /**
+     * @param string|null $ref
+     * @return void
+     */
+    public function setRef($ref)
     {
         $this->ref = $ref;
     }
 
-    public static function fromUnstructured(string $ref): self
+    /**
+     * @param string $ref
+     * @return $this
+     */
+    public static function fromUnstructured($ref)
     {
         $information = new self();
         $information->ref = $ref;
@@ -30,22 +48,36 @@ class CreditorReferenceInformation
         return $information;
     }
 
-    public function getProprietary(): ?string
+    /**
+     * @return string|null
+     */
+    public function getProprietary()
     {
         return $this->proprietary;
     }
 
-    public function setProprietary(?string $proprietary): void
+    /**
+     * @param string|null $proprietary
+     * @return void
+     */
+    public function setProprietary($proprietary)
     {
         $this->proprietary = $proprietary;
     }
 
-    public function getCode(): ?string
+    /**
+     * @return string|null
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setCode(?string $code): void
+    /**
+     * @param string|null $code
+     * @return void
+     */
+    public function setCode($code)
     {
         $this->code = $code;
     }

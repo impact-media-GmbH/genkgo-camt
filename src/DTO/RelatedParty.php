@@ -1,27 +1,40 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class RelatedParty
 {
-    private RelatedPartyTypeInterface $relatedPartyDetails;
+    /**
+     * @var \Genkgo\Camt\DTO\RelatedPartyTypeInterface
+     */
+    private $relatedPartyDetails;
 
-    private ?Account $account;
+    /**
+     * @var \Genkgo\Camt\DTO\Account|null
+     */
+    private $account;
 
-    public function __construct(RelatedPartyTypeInterface $relatedPartyDetails, ?Account $account)
+    /**
+     * @param \Genkgo\Camt\DTO\Account|null $account
+     */
+    public function __construct(RelatedPartyTypeInterface $relatedPartyDetails, $account)
     {
         $this->relatedPartyDetails = $relatedPartyDetails;
         $this->account = $account;
     }
 
-    public function getRelatedPartyType(): RelatedPartyTypeInterface
+    /**
+     * @return \Genkgo\Camt\DTO\RelatedPartyTypeInterface
+     */
+    public function getRelatedPartyType()
     {
         return $this->relatedPartyDetails;
     }
 
-    public function getAccount(): ?Account
+    /**
+     * @return \Genkgo\Camt\DTO\Account|null
+     */
+    public function getAccount()
     {
         return $this->account;
     }

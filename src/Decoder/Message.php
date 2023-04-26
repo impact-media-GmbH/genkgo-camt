@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder;
 
 use Genkgo\Camt\Decoder\Factory\DTO as DTOFactory;
@@ -10,9 +8,15 @@ use SimpleXMLElement;
 
 abstract class Message
 {
-    protected Record $recordDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\Record
+     */
+    protected $recordDecoder;
 
-    protected DateDecoderInterface $dateDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\DateDecoderInterface
+     */
+    protected $dateDecoder;
 
     /**
      * Message constructor.
@@ -23,7 +27,12 @@ abstract class Message
         $this->dateDecoder = $dateDecoder;
     }
 
-    public function addGroupHeader(DTO\Message $message, SimpleXMLElement $document): void
+    /**
+     * @param \Genkgo\Camt\DTO\Message $message
+     * @param \SimpleXMLElement $document
+     * @return void
+     */
+    public function addGroupHeader($message, $document)
     {
         $xmlGroupHeader = $this->getRootElement($document)->GrpHdr;
         $groupHeader = new DTO\GroupHeader(
@@ -51,7 +60,12 @@ abstract class Message
         $message->setGroupHeader($groupHeader);
     }
 
-    public function addCommonRecordInformation(DTO\Record $record, SimpleXMLElement $xmlRecord): void
+    /**
+     * @param \Genkgo\Camt\DTO\Record $record
+     * @param \SimpleXMLElement $xmlRecord
+     * @return void
+     */
+    public function addCommonRecordInformation($record, $xmlRecord)
     {
         if (isset($xmlRecord->ElctrncSeqNb)) {
             $record->setElectronicSequenceNumber((string) $xmlRecord->ElctrncSeqNb);
@@ -68,7 +82,16 @@ abstract class Message
         }
     }
 
-    abstract public function addRecords(DTO\Message $message, SimpleXMLElement $document): void;
+    /**
+     * @param \Genkgo\Camt\DTO\Message $message
+     * @param \SimpleXMLElement $document
+     * @return void
+     */
+    abstract public function addRecords($message, $document);
 
-    abstract public function getRootElement(SimpleXMLElement $document): SimpleXMLElement;
+    /**
+     * @param \SimpleXMLElement $document
+     * @return \SimpleXMLElement
+     */
+    abstract public function getRootElement($document);
 }

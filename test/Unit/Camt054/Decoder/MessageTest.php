@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Camt054\Decoder;
 
 use Genkgo\Camt\Camt054;
@@ -18,15 +16,24 @@ class MessageTest extends Framework\TestCase
      */
     private $mockedRecordDecoder;
 
-    private Message $decoder;
+    /**
+     * @var \Genkgo\Camt\Camt054\Decoder\Message
+     */
+    private $decoder;
 
-    protected function setUp(): void
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
         $this->mockedRecordDecoder = $this->createMock(DecoderObject\Record::class);
         $this->decoder = new Message($this->mockedRecordDecoder, new DecoderObject\Date());
     }
 
-    public function testItAddsGroupHeader(): void
+    /**
+     * @return void
+     */
+    public function testItAddsGroupHeader()
     {
         $message = $this->createMock(DTO\Message::class);
 
@@ -38,22 +45,21 @@ class MessageTest extends Framework\TestCase
         $this->decoder->addGroupHeader($message, $this->getXmlMessage());
     }
 
-    public function testItAddsNotifications(): void
+    /**
+     * @return void
+     */
+    public function testItAddsNotifications()
     {
         $message = $this->createMock(DTO\Message::class);
 
         $this->mockedRecordDecoder
             ->expects(self::once())
-            ->method('addEntries')
-            ->with(
-                self::isInstanceOf(Camt054\DTO\Notification::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addEntries')->with(self::isInstanceOf(Camt054\DTO\Notification::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $message
             ->expects(self::once())
             ->method('setRecords')
-            ->with(self::callback(static function (array $records): bool {
+            ->with(self::callback(static function (array $records) {
                 self::assertContainsOnlyInstancesOf(Camt054\DTO\Notification::class, $records);
                 self::assertCount(1, $records);
 
@@ -63,7 +69,10 @@ class MessageTest extends Framework\TestCase
         $this->decoder->addRecords($message, $this->getXmlMessage());
     }
 
-    private function getXmlMessage(): SimpleXMLElement
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getXmlMessage()
     {
         $xmlContent = <<<XML
 <content>

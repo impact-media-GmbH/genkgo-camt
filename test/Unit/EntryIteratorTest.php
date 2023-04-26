@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use DOMDocument;
@@ -12,7 +10,10 @@ use PHPUnit\Framework;
 
 class EntryIteratorTest extends Framework\TestCase
 {
-    protected function getDefaultMessage(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getDefaultMessage()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v2.multi.statement.xml');
@@ -20,7 +21,10 @@ class EntryIteratorTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    public function testMultipleStatements(): void
+    /**
+     * @return void
+     */
+    public function testMultipleStatements()
     {
         $message = $this->getDefaultMessage();
         $entries = $message->getEntries();

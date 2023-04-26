@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder;
 
 use Genkgo\Camt\DTO;
@@ -11,11 +9,20 @@ use SimpleXMLElement;
 
 class Record
 {
-    private Entry $entryDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\Entry
+     */
+    private $entryDecoder;
 
-    private DateDecoderInterface $dateDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\DateDecoderInterface
+     */
+    private $dateDecoder;
 
-    private MoneyFactory $moneyFactory;
+    /**
+     * @var \Genkgo\Camt\Util\MoneyFactory
+     */
+    private $moneyFactory;
 
     /**
      * Record constructor.
@@ -27,7 +34,12 @@ class Record
         $this->moneyFactory = new MoneyFactory();
     }
 
-    public function addBalances(RecordWithBalances $record, SimpleXMLElement $xmlRecord): void
+    /**
+     * @param \Genkgo\Camt\DTO\RecordWithBalances $record
+     * @param \SimpleXMLElement $xmlRecord
+     * @return void
+     */
+    public function addBalances($record, $xmlRecord)
     {
         $xmlBalances = $xmlRecord->Bal;
         foreach ($xmlBalances as $xmlBalance) {
@@ -75,7 +87,12 @@ class Record
         }
     }
 
-    public function addEntries(DTO\Record $record, SimpleXMLElement $xmlRecord): void
+    /**
+     * @param \Genkgo\Camt\DTO\Record $record
+     * @param \SimpleXMLElement $xmlRecord
+     * @return void
+     */
+    public function addEntries($record, $xmlRecord)
     {
         $index = 0;
         $xmlEntries = $xmlRecord->Ntry;
@@ -193,13 +210,16 @@ class Record
         }
     }
 
-    private function readStatus(SimpleXMLElement $xmlEntry): ?string
+    /**
+     * @return string|null
+     */
+    private function readStatus(SimpleXMLElement $xmlEntry)
     {
         $xmlStatus = $xmlEntry->Sts;
 
         // CAMT v08 uses substructure, so we check for its existence or fallback to the element itself to keep compatibility with CAMT v04
-        return (string) $xmlStatus?->Cd
-            ?: (string) $xmlStatus?->Prtry
+        return (string) (($xmlStatus2 = $xmlStatus) ? $xmlStatus2->Cd : null)
+            ?: (string) (($xmlStatus2 = $xmlStatus) ? $xmlStatus2->Prtry : null)
                 ?: (string) $xmlStatus
                     ?: null;
     }

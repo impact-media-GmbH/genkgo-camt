@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Camt052;
 
 use DateTimeImmutable;
@@ -16,7 +14,10 @@ use PHPUnit\Framework;
 
 class EndToEndTest extends Framework\TestCase
 {
-    protected function getV1Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV1Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v1.xml');
@@ -24,7 +25,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V01())->getDecoder()->decode($dom);
     }
 
-    protected function getV2Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV2Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v2.xml');
@@ -32,7 +36,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    protected function getV2OtherAccountMessage(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV2OtherAccountMessage()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v2.other-account.xml');
@@ -40,7 +47,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    protected function getV4Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV4Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v4.xml');
@@ -48,7 +58,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V04())->getDecoder()->decode($dom);
     }
 
-    protected function getV6Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV6Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v6.xml');
@@ -56,7 +69,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V06())->getDecoder()->decode($dom);
     }
 
-    protected function getV8Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV8Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt052.v8.xml');
@@ -64,7 +80,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V08())->getDecoder()->decode($dom);
     }
 
-    public function testGroupHeader(): void
+    /**
+     * @return void
+     */
+    public function testGroupHeader()
     {
         $messages = [
             $this->getV1Message(),
@@ -99,7 +118,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testReports(): void
+    /**
+     * @return void
+     */
+    public function testReports()
     {
         $messages = [
             $this->getV1Message(),
@@ -127,7 +149,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testEntries(): void
+    /**
+     * @return void
+     */
+    public function testEntries()
     {
         $messages = [
             $this->getV1Message(),
@@ -160,7 +185,10 @@ class EndToEndTest extends Framework\TestCase
         self::assertTrue($reportV4->getPagination()->isLastPage());
     }
 
-    public function testStatuses(): void
+    /**
+     * @return void
+     */
+    public function testStatuses()
     {
         $messages = [
             $this->getV1Message(),
@@ -172,7 +200,10 @@ class EndToEndTest extends Framework\TestCase
         self::assertEquals('PDNG', $messages[1]->getRecords()[0]->getEntries()[0]->getStatus());
     }
 
-    public function testRelatedAgents(): void
+    /**
+     * @return void
+     */
+    public function testRelatedAgents()
     {
         $messages = [
             $this->getV2Message(),
@@ -202,7 +233,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testOtherAccount(): void
+    /**
+     * @return void
+     */
+    public function testOtherAccount()
     {
         $messages = [
             $this->getV2OtherAccountMessage(),
@@ -228,7 +262,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testRelatedParties(): void
+    /**
+     * @return void
+     */
+    public function testRelatedParties()
     {
         $messages = [
             $this->getV2Message(),
@@ -269,7 +306,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testProprietaryBankTransactionCode(): void
+    /**
+     * @return void
+     */
+    public function testProprietaryBankTransactionCode()
     {
         $messages = [
             $this->getV2Message(),

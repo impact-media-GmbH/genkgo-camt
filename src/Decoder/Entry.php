@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Decoder;
 
 use Genkgo\Camt\DTO;
@@ -9,14 +7,22 @@ use SimpleXMLElement;
 
 class Entry
 {
-    private EntryTransactionDetail $entryTransactionDetailDecoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\EntryTransactionDetail
+     */
+    private $entryTransactionDetailDecoder;
 
     public function __construct(EntryTransactionDetail $entryTransactionDetailDecoder)
     {
         $this->entryTransactionDetailDecoder = $entryTransactionDetailDecoder;
     }
 
-    public function addTransactionDetails(DTO\Entry $entry, SimpleXMLElement $xmlEntry): void
+    /**
+     * @param \Genkgo\Camt\DTO\Entry $entry
+     * @param \SimpleXMLElement $xmlEntry
+     * @return void
+     */
+    public function addTransactionDetails($entry, $xmlEntry)
     {
         $xmlDetails = $xmlEntry->NtryDtls->TxDtls;
 

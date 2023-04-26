@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt054\Decoder;
 
 use Genkgo\Camt\Camt054\DTO as Camt054DTO;
@@ -14,7 +12,12 @@ use SimpleXMLElement;
 
 class Message extends BaseMessageDecoder
 {
-    public function addRecords(DTO\Message $message, SimpleXMLElement $document): void
+    /**
+     * @param \Genkgo\Camt\DTO\Message $message
+     * @param \SimpleXMLElement $document
+     * @return void
+     */
+    public function addRecords($message, $document)
     {
         $notifications = [];
 
@@ -48,13 +51,19 @@ class Message extends BaseMessageDecoder
 
     /**
      * @inheritDoc
+     * @param \SimpleXMLElement $document
+     * @return \SimpleXMLElement
      */
-    public function getRootElement(SimpleXMLElement $document): SimpleXMLElement
+    public function getRootElement($document)
     {
         return $document->BkToCstmrDbtCdtNtfctn;
     }
 
-    protected function getAccount(SimpleXMLElement $xmlRecord): Account
+    /**
+     * @param \SimpleXMLElement $xmlRecord
+     * @return \Genkgo\Camt\DTO\Account
+     */
+    protected function getAccount($xmlRecord)
     {
         if (isset($xmlRecord->Acct->Id->IBAN)) {
             return new DTO\IbanAccount(new Iban((string) $xmlRecord->Acct->Id->IBAN));

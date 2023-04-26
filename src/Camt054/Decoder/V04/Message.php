@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\Camt054\Decoder\V04;
 
 use Genkgo\Camt\Camt054\Decoder\Message as BaseMessage;
@@ -14,8 +12,11 @@ class Message extends BaseMessage
 {
     /**
      * @inheritDoc
+     * @param \Genkgo\Camt\DTO\Message $message
+     * @param \SimpleXMLElement $document
+     * @return void
      */
-    public function addGroupHeader(DTO\Message $message, SimpleXMLElement $document): void
+    public function addGroupHeader($message, $document)
     {
         $xmlGroupHeader = $this->getRootElement($document)->GrpHdr;
         $groupHeader = new Camt054V04DTO\GroupHeader(

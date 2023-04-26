@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit;
 
 use Genkgo\Camt\Camt052;
@@ -16,7 +14,10 @@ use PHPUnit\Framework\TestCase;
  */
 class ConfigTest extends TestCase
 {
-    public function testDefaultConfigHasMessageFormats(): void
+    /**
+     * @return void
+     */
+    public function testDefaultConfigHasMessageFormats()
     {
         $config = Config::getDefault();
 
@@ -37,7 +38,9 @@ class ConfigTest extends TestCase
             Camt054\MessageFormat\V08::class,
         ];
 
-        $actualMessageFormats = array_map(static fn (MessageFormatInterface $messageFormat): string => get_class($messageFormat), $messageFormats);
+        $actualMessageFormats = array_map(static function (MessageFormatInterface $messageFormat) {
+            return get_class($messageFormat);
+        }, $messageFormats);
 
         $additionalMessageFormats = array_diff(
             $actualMessageFormats,
@@ -76,14 +79,20 @@ TXT
         ));
     }
 
-    public function testDefaultConfigHasXsdValidation(): void
+    /**
+     * @return void
+     */
+    public function testDefaultConfigHasXsdValidation()
     {
         $config = Config::getDefault();
 
         self::assertTrue($config->getXsdValidation());
     }
 
-    public function testNoValidateConfigHasNoXsdValidation(): void
+    /**
+     * @return void
+     */
+    public function testNoValidateConfigHasNoXsdValidation()
     {
         $config = Config::getDefault();
         $config->disableXsdValidation();

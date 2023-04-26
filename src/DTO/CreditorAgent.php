@@ -1,40 +1,62 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class CreditorAgent implements RelatedAgentTypeInterface
 {
-    private string $name;
+    /**
+     * @var string
+     */
+    private $name;
 
-    private string $BIC;
+    /**
+     * @var string
+     */
+    private $BIC;
 
     /**
      * CreditorAgent constructor.
+     * @param string $name
+     * @param string $BIC
      */
-    public function __construct(string $name, string $BIC)
+    public function __construct($name, $BIC)
     {
+        $name = (string) $name;
+        $BIC = (string) $BIC;
         $this->name = $name;
         $this->BIC = $BIC;
     }
 
-    public function getName(): string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
     {
         $this->name = $name;
     }
 
-    public function getBIC(): string
+    /**
+     * @return string
+     */
+    public function getBIC()
     {
         return $this->BIC;
     }
 
-    public function setBIC(string $BIC): void
+    /**
+     * @param string $BIC
+     * @return void
+     */
+    public function setBIC($BIC)
     {
         $this->BIC = $BIC;
     }

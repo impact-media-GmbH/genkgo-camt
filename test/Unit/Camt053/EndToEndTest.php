@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Camt053;
 
 use DateTimeImmutable;
@@ -17,7 +15,10 @@ use PHPUnit\Framework;
 
 class EndToEndTest extends Framework\TestCase
 {
-    protected function getV2Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV2Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v2.minimal.xml');
@@ -25,7 +26,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    protected function getV2UltimateMessage(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV2UltimateMessage()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v2.minimal.ultimate.xml');
@@ -33,7 +37,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    protected function getV3Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV3Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v3.xml');
@@ -41,7 +48,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V03())->getDecoder()->decode($dom);
     }
 
-    protected function getV4Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV4Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v4.xml');
@@ -49,7 +59,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V04())->getDecoder()->decode($dom);
     }
 
-    protected function getV8Message(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    protected function getV8Message()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v8.xml');
@@ -57,7 +70,10 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V08())->getDecoder()->decode($dom);
     }
 
-    public function testWrongDocument(): Message
+    /**
+     * @return \Genkgo\Camt\DTO\Message
+     */
+    public function testWrongDocument()
     {
         $this->expectException(InvalidMessageException::class);
 
@@ -67,35 +83,50 @@ class EndToEndTest extends Framework\TestCase
         return (new MessageFormat\V02())->getDecoder()->decode($dom);
     }
 
-    public function testFiveDecimalsStatement(): void
+    /**
+     * @return void
+     */
+    public function testFiveDecimalsStatement()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v2.five.decimals.xml');
         self::assertInstanceOf(Message::class, (new MessageFormat\V02())->getDecoder()->decode($dom));
     }
 
-    public function testV3Document(): void
+    /**
+     * @return void
+     */
+    public function testV3Document()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v3.xml');
         self::assertInstanceOf(Message::class, (new MessageFormat\V03())->getDecoder()->decode($dom));
     }
 
-    public function testV4Document(): void
+    /**
+     * @return void
+     */
+    public function testV4Document()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v4.xml');
         self::assertInstanceOf(Message::class, (new MessageFormat\V04())->getDecoder()->decode($dom));
     }
 
-    public function testV8Document(): void
+    /**
+     * @return void
+     */
+    public function testV8Document()
     {
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->load('test/data/camt053.v8.xml');
         self::assertInstanceOf(Message::class, (new MessageFormat\V08())->getDecoder()->decode($dom));
     }
 
-    public function testGroupHeader(): void
+    /**
+     * @return void
+     */
+    public function testGroupHeader()
     {
         $messages = [
             $this->getV2Message(),
@@ -130,7 +161,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testStatements(): void
+    /**
+     * @return void
+     */
+    public function testStatements()
     {
         $messages = [
             $this->getV2Message(),
@@ -165,7 +199,10 @@ class EndToEndTest extends Framework\TestCase
         self::assertTrue($statementV4->getPagination()->isLastPage());
     }
 
-    public function testBalance(): void
+    /**
+     * @return void
+     */
+    public function testBalance()
     {
         $messages = [
             $this->getV2Message(),
@@ -210,7 +247,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    private function extractBalances(RecordWithBalances $statement): array
+    /**
+     * @return mixed[]
+     */
+    private function extractBalances(RecordWithBalances $statement)
     {
         $result = [];
         foreach ($statement->getBalances() as $balance) {
@@ -224,7 +264,10 @@ class EndToEndTest extends Framework\TestCase
         return $result;
     }
 
-    public function testEntries(): void
+    /**
+     * @return void
+     */
+    public function testEntries()
     {
         $messages = [
             $this->getV2Message(),
@@ -291,7 +334,10 @@ class EndToEndTest extends Framework\TestCase
         }
     }
 
-    public function testStructuredMessage(): void
+    /**
+     * @return void
+     */
+    public function testStructuredMessage()
     {
         $messages = [
             $this->getV2Message(),

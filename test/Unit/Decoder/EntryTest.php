@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\TestCamt\Unit\Decoder;
 
 use Genkgo\Camt\Decoder;
@@ -17,15 +15,24 @@ class EntryTest extends Framework\TestCase
      */
     private $mockedEntryTransactionDetailDecoder;
 
-    private Entry $decoder;
+    /**
+     * @var \Genkgo\Camt\Decoder\Entry
+     */
+    private $decoder;
 
-    protected function setUp(): void
+    /**
+     * @return void
+     */
+    protected function setUp()
     {
         $this->mockedEntryTransactionDetailDecoder = $this->createMock(Decoder\EntryTransactionDetail::class);
         $this->decoder = new Entry($this->mockedEntryTransactionDetailDecoder);
     }
 
-    public function testItDoesNotAddTransactionDetailsIfThereIsNoneInXml(): void
+    /**
+     * @return void
+     */
+    public function testItDoesNotAddTransactionDetailsIfThereIsNoneInXml()
     {
         $entry = $this->createMock(DTO\Entry::class);
 
@@ -38,7 +45,10 @@ class EntryTest extends Framework\TestCase
         $this->decoder->addTransactionDetails($entry, $xmlEntry);
     }
 
-    public function testItAddsTransactionDetailsIfThereArePresentInXml(): void
+    /**
+     * @return void
+     */
+    public function testItAddsTransactionDetailsIfThereArePresentInXml()
     {
         $entry = $this->createMock(DTO\Entry::class);
 
@@ -52,84 +62,43 @@ class EntryTest extends Framework\TestCase
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addRelatedParties')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addRelatedParties')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addRelatedAgents')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addRelatedAgents')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addRemittanceInformation')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addRemittanceInformation')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addRelatedDates')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addRelatedDates')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addReturnInformation')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addReturnInformation')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addAdditionalTransactionInformation')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addAdditionalTransactionInformation')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addBankTransactionCode')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addBankTransactionCode')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addCharges')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addCharges')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addAmountDetails')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addAmountDetails')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $this->mockedEntryTransactionDetailDecoder
             ->expects(self::once())
-            ->method('addAmount')
-            ->with(
-                self::isInstanceOf(DTO\EntryTransactionDetail::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-                self::isInstanceOf(SimpleXMLElement::class),
-            );
+            ->method('addAmount')->with(self::isInstanceOf(DTO\EntryTransactionDetail::class), self::isInstanceOf(SimpleXMLElement::class), self::isInstanceOf(SimpleXMLElement::class));
 
         $entry
             ->expects(self::once())
@@ -139,7 +108,10 @@ class EntryTest extends Framework\TestCase
         $this->decoder->addTransactionDetails($entry, $this->getXmlEntry());
     }
 
-    private function getXmlEntry(): SimpleXMLElement
+    /**
+     * @return \SimpleXMLElement
+     */
+    private function getXmlEntry()
     {
         $xmlContent = <<<XML
 <content>

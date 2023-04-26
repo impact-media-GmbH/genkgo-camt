@@ -1,37 +1,61 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 class ProprietaryBankTransactionCode
 {
-    private string $code;
+    /**
+     * @var string
+     */
+    private $code;
 
-    private string $issuer;
+    /**
+     * @var string
+     */
+    private $issuer;
 
-    public function __construct(string $code, string $issuer)
+    /**
+     * @param string $code
+     * @param string $issuer
+     */
+    public function __construct($code, $issuer)
     {
+        $code = (string) $code;
+        $issuer = (string) $issuer;
         $this->code = $code;
         $this->issuer = $issuer;
     }
 
-    public function getCode(): string
+    /**
+     * @return string
+     */
+    public function getCode()
     {
         return $this->code;
     }
 
-    public function setCode(string $code): void
+    /**
+     * @param string $code
+     * @return void
+     */
+    public function setCode($code)
     {
         $this->code = $code;
     }
 
-    public function getIssuer(): string
+    /**
+     * @return string
+     */
+    public function getIssuer()
     {
         return $this->issuer;
     }
 
-    public function setIssuer(string $issuer): void
+    /**
+     * @param string $issuer
+     * @return void
+     */
+    public function setIssuer($issuer)
     {
         $this->issuer = $issuer;
     }

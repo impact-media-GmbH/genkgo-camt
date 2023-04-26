@@ -1,26 +1,34 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use Genkgo\Camt\Iterator\EntryIterator;
 
 class Message
 {
-    private GroupHeader $groupHeader;
+    /**
+     * @var \Genkgo\Camt\DTO\GroupHeader
+     */
+    private $groupHeader;
 
     /**
      * @var Record[]
      */
-    private array $records = [];
+    private $records = [];
 
-    public function getGroupHeader(): GroupHeader
+    /**
+     * @return \Genkgo\Camt\DTO\GroupHeader
+     */
+    public function getGroupHeader()
     {
         return $this->groupHeader;
     }
 
-    public function setGroupHeader(GroupHeader $groupHeader): void
+    /**
+     * @param \Genkgo\Camt\DTO\GroupHeader $groupHeader
+     * @return void
+     */
+    public function setGroupHeader($groupHeader)
     {
         $this->groupHeader = $groupHeader;
     }
@@ -28,15 +36,16 @@ class Message
     /**
      * @return Record[]
      */
-    public function getRecords(): array
+    public function getRecords()
     {
         return $this->records;
     }
 
     /**
      * @param Record[] $records
+     * @return void
      */
-    public function setRecords(array $records): void
+    public function setRecords($records)
     {
         $this->records = $records;
     }
@@ -44,7 +53,7 @@ class Message
     /**
      * @return Entry[]|EntryIterator
      */
-    public function getEntries(): EntryIterator
+    public function getEntries()
     {
         return new EntryIterator($this);
     }

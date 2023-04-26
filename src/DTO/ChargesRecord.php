@@ -1,45 +1,73 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Genkgo\Camt\DTO;
 
 use Money\Money;
 
 class ChargesRecord
 {
-    private Money $amount;
+    /**
+     * @var \Money\Money
+     */
+    private $amount;
 
-    private bool $chargesIncludedIndicator = false;
+    /**
+     * @var bool
+     */
+    private $chargesIncludedIndicator = false;
 
-    private string $identification;
+    /**
+     * @var string
+     */
+    private $identification;
 
-    public function getAmount(): Money
+    /**
+     * @return \Money\Money
+     */
+    public function getAmount()
     {
         return $this->amount;
     }
 
-    public function setAmount(Money $money): void
+    /**
+     * @param \Money\Money $money
+     * @return void
+     */
+    public function setAmount($money)
     {
         $this->amount = $money;
     }
 
-    public function getChargesIncludedIndicator(): bool
+    /**
+     * @return bool
+     */
+    public function getChargesIncludedIndicator()
     {
         return $this->chargesIncludedIndicator;
     }
 
-    public function setChargesIncludedIndicator(bool $chargesIncludedIndicator): void
+    /**
+     * @param bool $chargesIncludedIndicator
+     * @return void
+     */
+    public function setChargesIncludedIndicator($chargesIncludedIndicator)
     {
         $this->chargesIncludedIndicator = $chargesIncludedIndicator;
     }
 
-    public function getIdentification(): string
+    /**
+     * @return string
+     */
+    public function getIdentification()
     {
         return $this->identification;
     }
 
-    public function setIdentification(string $identification): void
+    /**
+     * @param string $identification
+     * @return void
+     */
+    public function setIdentification($identification)
     {
         $this->identification = $identification;
     }

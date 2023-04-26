@@ -23,7 +23,7 @@ final class RegistryTest extends TestCase
      */
     private $registry;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->registry = new Registry(new PhpRegistryLoader());
     }
@@ -56,6 +56,6 @@ final class RegistryTest extends TestCase
      */
     private function getData()
     {
-        return require dirname(__DIR__, 2) . '/Resource/iban_registry_202009r88.php';
+        return require dirname(dirname(__DIR__)) . '/Resource/iban_registry_202009r88.php';
     }
 }
