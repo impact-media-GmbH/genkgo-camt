@@ -78,6 +78,11 @@ class Entry
     private $status;
 
     /**
+     * @var string|null
+     */
+    private $creditDebitIndicator;
+
+    /**
      * @param int $index
      */
     public function __construct(Record $record, $index, Money $amount)
@@ -310,5 +315,22 @@ class Entry
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCreditDebitIndicator()
+    {
+        return $this->creditDebitIndicator;
+    }
+
+    /**
+     * @param string|null $creditDebitIndicator
+     * @return void
+     */
+    public function setCreditDebitIndicator($creditDebitIndicator)
+    {
+        $this->creditDebitIndicator = $creditDebitIndicator;
     }
 }

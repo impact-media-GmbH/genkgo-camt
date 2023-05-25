@@ -62,6 +62,11 @@ class EntryTransactionDetail
     private $amount;
 
     /**
+     * @var string|null
+     */
+    private $creditDebitIndicator;
+
+    /**
      * @param \Genkgo\Camt\DTO\Reference|null $reference
      * @return void
      */
@@ -270,5 +275,22 @@ class EntryTransactionDetail
     public function setAmount($amount)
     {
         $this->amount = $amount;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCreditDebitIndicator()
+    {
+        return $this->creditDebitIndicator;
+    }
+
+    /**
+     * @param string|null $creditDebitIndicator
+     * @return void
+     */
+    public function setCreditDebitIndicator($creditDebitIndicator)
+    {
+        $this->creditDebitIndicator = $creditDebitIndicator;
     }
 }

@@ -32,6 +32,20 @@ abstract class EntryTransactionDetail
 
     /**
      * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
+     * @param \SimpleXMLElement $CdtDbtInd
+     * @return void
+     */
+    public function addCreditDebitIdentifier($detail, $CdtDbtInd)
+    {
+        $creditDebitIdentifier = (string) $CdtDbtInd;
+        $creditDebitIdentifier = in_array($creditDebitIdentifier, ['CRDT', 'DBIT'], true)
+            ? $creditDebitIdentifier
+            : null;
+        $detail->setCreditDebitIndicator($creditDebitIdentifier);
+    }
+
+    /**
+     * @param \Genkgo\Camt\DTO\EntryTransactionDetail $detail
      * @param \SimpleXMLElement $xmlDetail
      * @return void
      */
